@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using OptionsWorkshop.Math.Helpers.Matplotlib.Protocol;
 
-namespace OptionsWorkshop.Math.Helpers.Matplotlib
+namespace MatplotlibCS
 {
     /// <summary>
     /// Обёртка над питоновским скриптом построения графиков
@@ -20,12 +14,12 @@ namespace OptionsWorkshop.Math.Helpers.Matplotlib
         /// <summary>
         /// Пусть к интерпрететору питона
         /// </summary>
-        private string _pythonExePath;
+        private readonly string _pythonExePath;
 
         /// <summary>
         /// Путь к скрипту dasPlot.py
         /// </summary>
-        private string _dasPlotPyPath;
+        private readonly string _dasPlotPyPath;
 
         #endregion
 

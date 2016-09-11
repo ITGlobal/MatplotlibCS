@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace OptionsWorkshop.Math.Helpers.Matplotlib.Protocol
+namespace MatplotlibCS
 {
     [JsonObject(Title = "axes")]
     public class Axes
@@ -13,10 +9,10 @@ namespace OptionsWorkshop.Math.Helpers.Matplotlib.Protocol
         #region .ctor
 
         /// <summary>
-        /// Конструктор
+        /// Constructor
         /// </summary>
-        /// <param name="xtitle">Заголовок оси x</param>
-        /// <param name="ytitle">Заголовок оси y</param>
+        /// <param name="xtitle">Title for the X axis</param>
+        /// <param name="ytitle">Title for the Y axis</param>
         public Axes(string xtitle = "", string ytitle = "")
         {
             this.XTitle = xtitle;
