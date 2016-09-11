@@ -13,11 +13,12 @@ namespace MatplotlibCS
         /// </summary>
         /// <param name="xtitle">Заголовок оси x</param>
         /// <param name="ytitle">Заголовок оси y</param>
-        public Axes(string xtitle = "", string ytitle = "")
+        public Axes(int index = 1, string xtitle = "", string ytitle = "")
         {
+            this.Index = index;
             this.XTitle = xtitle;
             this.YTitle = ytitle;
-            Lines = new List<PlotItem>();
+            PlotItems = new List<PlotItem>();
         }
         #endregion
 
@@ -48,10 +49,10 @@ namespace MatplotlibCS
         public int Index { get; set; } = 1;
 
         /// <summary>
-        /// Линии
+        /// Lines and other plot items
         /// </summary>
         [JsonProperty(PropertyName = "items")]
-        public List<PlotItem> Lines { get; set; }
+        public List<PlotItem> PlotItems { get; set; }
 
         #endregion
     }

@@ -1,39 +1,51 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace MatplotlibCS
 {
     /// <summary>
-    /// Wrapper for lounching python script, which actually builds charts
+    /// Обёртка над питоновским скриптом построения графиков
     /// </summary>
     public class DasPlot
     {
         #region Fields
 
         /// <summary>
-        /// Path to python.exe
+        /// Пусть к интерпрететору питона
         /// </summary>
-        private readonly string _pythonExePath;
+        private string _pythonExePath;
 
         /// <summary>
-        /// Path to dasPlot.py
+        /// Путь к скрипту dasPlot.py
         /// </summary>
-        private readonly string _dasPlotPyPath;
+        private string _dasPlotPyPath;
+
+        /// <summary>
+        /// Путь директории, в которой хранятся временные json-файлы, через которые передаются параметры задачи
+        /// </summary>
+        private string _jsonTempPath;
 
         #endregion
 
         #region .ctor
 
         /// <summary>
-        /// Constructor
+        /// Обёртка над python скриптом, строящим matplotlib графики 
         /// </summary>
-        /// <param name="pythonExePath">Path to python.exe</param>
-        /// <param name="dasPlotPyPath">Path to dasPlot.py</param>
-        public DasPlot(string pythonExePath, string dasPlotPyPath)
+        /// <param name="pythonExePath">Путь python.exe</param>
+        /// <param name="dasPlotPyPath">Путь dasPlot.py</param>
+        /// <param name="jsonTempPath">Опциональный путь директории, в которой хранятся временные json файлы, через которые передаются данные</param>
+        public DasPlot(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\dasPlot")
         {
             _pythonExePath = pythonExePath;
             _dasPlotPyPath = dasPlotPyPath;
+            _jsonTempPath = jsonTempPath;
         }
 
         #endregion
@@ -41,23 +53,40 @@ namespace MatplotlibCS
         #region Public methods
 
         /// <summary>
-        /// Build a figure based on described 
+        /// Выполняет задачу построения графиков
         /// </summary>
         /// <param name="task">Описание задачи</param>
         public void DoTask(Figure task)
         {
-            var args = "";
+            var jsonPath = GetNewJsonPath();
             var serializer = new JsonSerializer() {StringEscapeHandling = StringEscapeHandling.EscapeHtml};
-            using (StringWriter writer = new StringWriter())
+
+            using (var writer = new StreamWriter(jsonPath))
             {
                 serializer.Serialize(writer, task);
-                args = writer.ToString();
-                args = args.Replace("\"", "\\\"");
             }
-
-            var psi = new ProcessStartInfo(_pythonExePath, $"{_dasPlotPyPath} \"{args}\"");
+            
+            var psi = new ProcessStartInfo(_pythonExePath, $"{_dasPlotPyPath} \"{jsonPath}\"");
             var process = Process.Start(psi);
             process.WaitForExit();
+        } 
+
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        /// Возвращает новый путь, по которому можно сохранить json задачи
+        /// </summary>
+        /// <returns></returns>
+        private string GetNewJsonPath()
+        {
+            if (!Directory.Exists(_jsonTempPath))
+            {
+                Directory.CreateDirectory(_jsonTempPath);
+            }
+
+            return Path.Combine(_jsonTempPath, $"task-{DateTime.Now:HHmmssfff}.json");
         }
 
         #endregion

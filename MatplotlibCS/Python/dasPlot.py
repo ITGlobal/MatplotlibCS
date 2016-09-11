@@ -17,7 +17,7 @@ def main(args):
         return
 
     print(args[0])
-
+    # input("Press Enter to continue...")
     # какой-то трюк, чтобы можно было делать подписи кириллицей
     rc('font', **{'sans-serif': 'Arial',
                   'family': 'sans-serif'})
@@ -28,8 +28,8 @@ def main(args):
 
     fig = plot.figure()
 	
-	subplots = {}
-	subplotIndex = 1
+    subplots = {}
+    subplotIndex = 1
     for i in range(0, task["rows"]):
         for j in range(0, task["columns"]):
             axes = fig.add_subplot(task["rows"], task["columns"], subplotIndex)

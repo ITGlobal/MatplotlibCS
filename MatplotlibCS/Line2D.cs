@@ -20,6 +20,8 @@ namespace MatplotlibCS
         public Line2D(string name)
         {
             Name = name;
+            X = new List<double>();
+            Y = new List<double>();
         }
             #endregion
 
