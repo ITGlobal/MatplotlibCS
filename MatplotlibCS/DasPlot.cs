@@ -5,19 +5,19 @@ using Newtonsoft.Json;
 namespace MatplotlibCS
 {
     /// <summary>
-    /// Обёртка над питоновским скриптом построения графиков
+    /// Wrapper for lounching python script, which actually builds charts
     /// </summary>
     public class DasPlot
     {
         #region Fields
 
         /// <summary>
-        /// Пусть к интерпрететору питона
+        /// Path to python.exe
         /// </summary>
         private readonly string _pythonExePath;
 
         /// <summary>
-        /// Путь к скрипту dasPlot.py
+        /// Path to dasPlot.py
         /// </summary>
         private readonly string _dasPlotPyPath;
 
@@ -25,6 +25,11 @@ namespace MatplotlibCS
 
         #region .ctor
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pythonExePath">Path to python.exe</param>
+        /// <param name="dasPlotPyPath">Path to dasPlot.py</param>
         public DasPlot(string pythonExePath, string dasPlotPyPath)
         {
             _pythonExePath = pythonExePath;
@@ -36,7 +41,7 @@ namespace MatplotlibCS
         #region Public methods
 
         /// <summary>
-        /// Выполняет задачу построения графиков
+        /// Build a figure based on described 
         /// </summary>
         /// <param name="task">Описание задачи</param>
         public void DoTask(Figure task)
@@ -53,7 +58,7 @@ namespace MatplotlibCS
             var psi = new ProcessStartInfo(_pythonExePath, $"{_dasPlotPyPath} \"{args}\"");
             var process = Process.Start(psi);
             process.WaitForExit();
-        } 
+        }
 
         #endregion
     }

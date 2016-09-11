@@ -47,7 +47,9 @@
     <Compile Include="Axes.cs" />
     <Compile Include="DasPlot.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="Line.cs" />
+    <Compile Include="Histogram.cs" />
+    <Compile Include="Line2D.cs" />
+    <Compile Include="PlotItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

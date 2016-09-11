@@ -9,19 +9,25 @@ namespace MatplotlibCS
         #region .ctor
 
         /// <summary>
-        /// Constructor
+        /// Конструктор
         /// </summary>
-        /// <param name="xtitle">Title for the X axis</param>
-        /// <param name="ytitle">Title for the Y axis</param>
+        /// <param name="xtitle">Заголовок оси x</param>
+        /// <param name="ytitle">Заголовок оси y</param>
         public Axes(string xtitle = "", string ytitle = "")
         {
             this.XTitle = xtitle;
             this.YTitle = ytitle;
-            Lines = new List<Line>();
+            Lines = new List<PlotItem>();
         }
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Заголовок осей
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
 
         /// <summary>
         /// Подпись к оси X
@@ -36,10 +42,16 @@ namespace MatplotlibCS
         public string YTitle { get; set; }
 
         /// <summary>
+        /// Индекс subplot-а на figure
+        /// </summary>
+        [JsonProperty(PropertyName = "index")]
+        public int Index { get; set; } = 1;
+
+        /// <summary>
         /// Линии
         /// </summary>
-        [JsonProperty(PropertyName = "lines")]
-        public List<Line> Lines { get; set; }
+        [JsonProperty(PropertyName = "items")]
+        public List<PlotItem> Lines { get; set; }
 
         #endregion
     }

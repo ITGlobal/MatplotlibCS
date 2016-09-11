@@ -14,14 +14,12 @@ namespace MatplotlibCS
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="subplotsRows">Количество строк с графиками</param>
-        /// <param name="subplotsColumns">Количество колонок с графиками</param>
-        /// <param name="title">Заголовок окна</param>
-        public Figure(int subplotsRows = 1, int subplotsColumns = 1, string title = "")
+        /// <param name="rows">Количество строк с графиками</param>
+        /// <param name="columns">Количество колонок с графиками</param>
+        public Figure(int rows = 1, int columns = 1)
         {
-            SubplotsRows = subplotsRows;
-            SubplotsColumns = subplotsColumns;
-            Title = title;
+            Rows = rows;
+            Columns = columns;
             Subplots = new List<Axes>();
         }
 
@@ -32,26 +30,26 @@ namespace MatplotlibCS
         /// <summary>
         /// Количество строк, на которое разбивается окно
         /// </summary>
-        [JsonProperty(PropertyName = "subplotRows")]
-        public int SubplotsRows { get; set; }
+        [JsonProperty(PropertyName = "rows")]
+        public int Rows { get; set; } = 1;
 
         /// <summary>
         /// Количество колонок, на которое разбивается окно
         /// </summary>
-        [JsonProperty(PropertyName = "subplotColumns")]
-        public int SubplotsColumns { get; set; }
-
-        /// <summary>
-        /// Заголовок графика
-        /// </summary>
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
+        [JsonProperty(PropertyName = "columns")]
+        public int Columns { get; set; } = 1;
+        
         /// <summary>
         /// Отдельные плоты (чарты) в пределах окна
         /// </summary>
         [JsonProperty(PropertyName = "subplots")]
         public List<Axes> Subplots { get; set; }
+
+        /// <summary>
+        /// Имя файла, в который нужно сохранить графики
+        /// </summary>
+        [JsonProperty(PropertyName = "filename")]
+        public string FileName { get; set; }
 
         #endregion
     }
