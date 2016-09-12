@@ -35,7 +35,7 @@ def main(args):
         for j in range(0, task["columns"]):
             axes = fig.add_subplot(task["rows"], task["columns"], subplot_index)
             subplots[subplot_index] = axes
-            setGrid(axes)
+            set_grid(axes)
             subplot_index += 1
 
     # draw items on each subplot
@@ -43,22 +43,38 @@ def main(args):
         for item in axes["items"]:
             axes = subplots[axes["index"]]
             plot.sca(axes)
-            setTitles(task, axes)
+            set_titles(task, axes)
 
             if item["type"] == "Line2D":
-                plotLine2D(item)
+                plot_line2d(item)
             elif item["type"] == "Histogram":
-                plotHistogram(item)
+                plot_histogram(item)
 
     plot.tight_layout()
     plot.show()
 
-    # if file name is provided in json, then save figure to file
+    save_figure_to_file(task)
+
+
+def save_figure_to_file(task):
+    """
+    Saves figure content to the file if it's path is provided
+
+    :type task: dict
+    :param task: Deserialized json with task description
+
+    :return:
+    """
     if "filename" in task and task["filename"] is not None:
         plot.savefig(task["filename"], dpi=300)
 
-# Plot simple 2D line
-def plotLine2D(line):
+
+def plot_line2d(line):
+    """
+    Plots simple 2D line
+    :param line: Line description dict
+    :return:
+    """
     c = 'r' if "color" not in line else line["color"]
     m = '' if "marker" not in line else line["marker"]
     lw = 1 if "lineWidth" not in line else line["lineWidth"]
@@ -67,20 +83,36 @@ def plotLine2D(line):
     plot.plot(line["x"], line["y"], color=c, marker=m, lw=lw, ms=ms, ls=ls)
     plot.hold(True)
 
-# Plot histogram
-def plotHistogram(line):
-    plot.hist(line["y"],50)
+
+def plot_histogram(hist):
+    """
+    Plots simple 2D histogram
+    :param hist:
+    :return:
+    """
+    plot.hist(hist["y"], 50)
     plot.hold(True)
 
-# Setup the grid
-def setGrid(axes):
+
+def set_grid(axes):
+    """
+    Setup axes grid
+    :param axes:
+    :return:
+    """
     axes.grid(which='both')
     axes.grid(which='minor', alpha=0.2)
     axes.grid(which='major', alpha=0.5)
     axes.grid('on')
 
-# Setup titeles
-def setTitles(task, axes):
+
+def set_titles(axes):
+    """
+    Setup subplot X and Y axis titles
+
+    :param axes:
+    :return:
+    """
     plot.title(u"{0}".format(axes["title"]))
     plot.ylabel(axes["xtitle"])
     plot.xlabel(axes["ytitle"])
