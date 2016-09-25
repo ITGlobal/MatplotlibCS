@@ -39,11 +39,11 @@ def main(args):
             subplot_index += 1
 
     # draw items on each subplot
-    for axes in task["subplots"]:
-        for item in axes["items"]:
-            axes = subplots[axes["index"]]
+    for subplot in task["subplots"]:
+        for item in subplot["items"]:
+            axes = subplots[subplot["index"]]
             plot.sca(axes)
-            set_titles(axes)
+            set_titles(task)
 
             if item["type"] == "Line2D":
                 plot_line2d(item)
@@ -106,16 +106,16 @@ def set_grid(axes):
     axes.grid('on')
 
 
-def set_titles(axes):
+def set_titles(task):
     """
     Setup subplot X and Y axis titles
 
-    :param axes:
+    :param task:
     :return:
     """
-    plot.title(u"{0}".format(axes["title"]))
-    plot.ylabel(axes["xtitle"])
-    plot.xlabel(axes["ytitle"])
+    plot.title(u"{0}".format(task["title"]))
+    plot.ylabel(task["xtitle"])
+    plot.xlabel(task["ytitle"])
 
 # entry point
 if __name__ == "__main__":
