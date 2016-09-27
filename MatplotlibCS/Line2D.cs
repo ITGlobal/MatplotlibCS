@@ -15,7 +15,6 @@ namespace MatplotlibCS
         /// Конструктор
         /// </summary>
         /// <param name="name">Название линии</param>
-        /// <param name="color">Цвет линии</param>
         /// 
         public Line2D(string name)
         {
@@ -23,7 +22,8 @@ namespace MatplotlibCS
             X = new List<double>();
             Y = new List<double>();
         }
-            #endregion
+
+        #endregion
 
         #region Properties
 

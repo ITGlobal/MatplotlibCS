@@ -1,0 +1,10 @@
+version: 1.0.{build}
+configuration: Release
+cache: 
+- 'C:\projects\MatplotlibCS\tools'
+- 'C:\projects\MatplotlibCS\packages'
+build_script:
+- ps: '& ./build.ps1'
+test: off
+artifacts:
+- path: artifacts\**\*.*

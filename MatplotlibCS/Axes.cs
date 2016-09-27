@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace MatplotlibCS
 {
+    /// <summary></summary>
     [JsonObject(Title = "axes")]
     public class Axes
     {
@@ -11,6 +12,7 @@ namespace MatplotlibCS
         /// <summary>
         /// Конструктор
         /// </summary>
+        /// <param name="index"></param>
         /// <param name="xtitle">Заголовок оси x</param>
         /// <param name="ytitle">Заголовок оси y</param>
         public Axes(int index = 1, string xtitle = "", string ytitle = "")

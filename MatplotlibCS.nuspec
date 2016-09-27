@@ -2,13 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>MatplotlibCS</id>
-    <version>1.0.1</version>
+    <version>$version$</version>
     <title>MatplotlibCS</title>
     <authors>Pavel Koryakin</authors>
     <owners>Pavel Koryakin</owners>
-    <licenseUrl>http://license_url_here_or_delete_this_line/</licenseUrl>
+    <licenseUrl>http://www.opensource.org/licenses/MIT</licenseUrl>
     <projectUrl>https://github.com/ITGlobal/MatplotlibCS</projectUrl>
-    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# wrapper which allows to easily build charts using Python Matplotlib</description>
     <releaseNotes>The first version of the utility.</releaseNotes>
@@ -19,4 +18,9 @@
     </dependencies>
     <summary>C# wrapper which allows to easily build charts using Python Matplotlib</summary>
   </metadata>
+  <files>
+    <file src="out\MatplotlibCS.dll" target="lib\net45" />
+    <file src="out\MatplotlibCS.xml" target="lib\net45" />
+    <file src="out\MatplotlibCS.pdb" target="lib\net45" />
+  </files>
 </package>

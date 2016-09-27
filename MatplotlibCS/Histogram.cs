@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace MatplotlibCS
 {
+    /// <summary></summary>
     public class Histogram : PlotItem
     {
 

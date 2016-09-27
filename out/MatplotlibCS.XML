@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MatplotlibCS</name>
+    </assembly>
+    <members>
+        <member name="T:MatplotlibCS.Axes">
+            <summary></summary>
+        </member>
+        <member name="M:MatplotlibCS.Axes.#ctor(System.Int32,System.String,System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="index"></param>
+            <param name="xtitle">Заголовок оси x</param>
+            <param name="ytitle">Заголовок оси y</param>
+        </member>
+        <member name="P:MatplotlibCS.Axes.Title">
+            <summary>
+            Заголовок осей
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Axes.XTitle">
+            <summary>
+            Подпись к оси X
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Axes.YTitle">
+            <summary>
+            Подпись к оси Y
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Axes.Index">
+            <summary>
+            Индекс subplot-а на figure
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Axes.PlotItems">
+            <summary>
+            Lines and other plot items
+            </summary>
+        </member>
+        <member name="T:MatplotlibCS.DasPlot">
+            <summary>
+            Обёртка над питоновским скриптом построения графиков
+            </summary>
+        </member>
+        <member name="F:MatplotlibCS.DasPlot._pythonExePath">
+            <summary>
+            Пусть к интерпрететору питона
+            </summary>
+        </member>
+        <member name="F:MatplotlibCS.DasPlot._dasPlotPyPath">
+            <summary>
+            Путь к скрипту dasPlot.py
+            </summary>
+        </member>
+        <member name="F:MatplotlibCS.DasPlot._jsonTempPath">
+            <summary>
+            Путь директории, в которой хранятся временные json-файлы, через которые передаются параметры задачи
+            </summary>
+        </member>
+        <member name="M:MatplotlibCS.DasPlot.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Обёртка над python скриптом, строящим matplotlib графики 
+            </summary>
+            <param name="pythonExePath">Путь python.exe</param>
+            <param name="dasPlotPyPath">Путь dasPlot.py</param>
+            <param name="jsonTempPath">Опциональный путь директории, в которой хранятся временные json файлы, через которые передаются данные</param>
+        </member>
+        <member name="M:MatplotlibCS.DasPlot.DoTask(MatplotlibCS.Figure)">
+            <summary>
+            Выполняет задачу построения графиков
+            </summary>
+            <param name="task">Описание задачи</param>
+        </member>
+        <member name="M:MatplotlibCS.DasPlot.GetNewJsonPath">
+            <summary>
+            Возвращает новый путь, по которому можно сохранить json задачи
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MatplotlibCS.Figure">
+            <summary>
+            Описание окна с графиками
+            </summary>
+        </member>
+        <member name="M:MatplotlibCS.Figure.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="rows">Количество строк с графиками</param>
+            <param name="columns">Количество колонок с графиками</param>
+        </member>
+        <member name="P:MatplotlibCS.Figure.Rows">
+            <summary>
+            Количество строк, на которое разбивается окно
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Figure.Columns">
+            <summary>
+            Количество колонок, на которое разбивается окно
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Figure.Subplots">
+            <summary>
+            Отдельные плоты (чарты) в пределах окна
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Figure.FileName">
+            <summary>
+            Имя файла, в который нужно сохранить графики
+            </summary>
+        </member>
+        <member name="T:MatplotlibCS.Histogram">
+            <summary></summary>
+        </member>
+        <member name="P:MatplotlibCS.Histogram.X">
+            <summary>
+            Данные для графика, аргумент
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Histogram.Y">
+            <summary>
+            Данные для графика, значение
+            </summary>
+        </member>
+        <member name="T:MatplotlibCS.Line2D">
+            <summary>
+            Описание линии графика
+            </summary>
+        </member>
+        <member name="M:MatplotlibCS.Line2D.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="name">Название линии</param>
+            
+        </member>
+        <member name="P:MatplotlibCS.Line2D.Name">
+            <summary>
+            Название линии
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.Color">
+            <summary>
+            Название цвета
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.Marker">
+            <summary>
+            Маркер точки
+            [ '+' | ',' | '.' | '1' | '2' | '3' | '4' ]
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.MarkerSize">
+            <summary>
+            Размер маркера
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.LineWidth">
+            <summary>
+            Толщина линии
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.LineStyle">
+            <summary>
+            Маркер точки
+            [ '-' | '--' | '-.' | ':' | 'steps' | ...]
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.X">
+            <summary>
+            Данные для графика, аргумент
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.Line2D.Y">
+            <summary>
+            Данные для графика, значение
+            </summary>
+        </member>
+        <member name="T:MatplotlibCS.PlotItem">
+            <summary>
+            Базовый класс для элементов, которые отрисовываются на графике
+            </summary>
+        </member>
+        <member name="P:MatplotlibCS.PlotItem.Type">
+            <summary>
+            Тип элемента графика (линия, гистограмма, подпись и т.д.)
+            </summary>
+        </member>
+    </members>
+</doc>

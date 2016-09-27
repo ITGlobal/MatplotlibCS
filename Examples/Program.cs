@@ -22,11 +22,6 @@ namespace Examples
         /// </summary>
         private static string _dasPlotPyPath;
 
-        /// <summary>
-        /// Path to the directory, where all outputs will be stored
-        /// </summary>
-        private static string _workingDirectoryPath = @"c:\temp\";
-
         static void Main(string[] args)
         {
             if (args.Length != 2)
