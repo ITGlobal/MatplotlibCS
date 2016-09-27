@@ -12,7 +12,8 @@ namespace MatplotlibCS
     /// <summary>
     /// Обёртка над питоновским скриптом построения графиков
     /// </summary>
-    public class DasPlot
+    // ReSharper disable once InconsistentNaming
+    public class MatplotlibCS
     {
         #region Fields
 
@@ -41,7 +42,7 @@ namespace MatplotlibCS
         /// <param name="pythonExePath">Путь python.exe</param>
         /// <param name="dasPlotPyPath">Путь dasPlot.py</param>
         /// <param name="jsonTempPath">Опциональный путь директории, в которой хранятся временные json файлы, через которые передаются данные</param>
-        public DasPlot(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\MatplotlibCS")
+        public MatplotlibCS(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\MatplotlibCS")
         {
             _pythonExePath = pythonExePath;
             _dasPlotPyPath = dasPlotPyPath;
@@ -56,9 +57,14 @@ namespace MatplotlibCS
         /// Выполняет задачу построения графиков
         /// </summary>
         /// <param name="task">Описание задачи</param>
-        public void DoTask(Figure task)
+        public void BuildFigure(Figure task)
         {
             var jsonPath = GetNewJsonPath();
+
+            // if only file name was given, without full path, then save file into JSON temp folder
+            if (!Path.IsPathRooted(task.FileName))
+                task.FileName = Path.Combine(_jsonTempPath, task.FileName);
+
             var serializer = new JsonSerializer() {StringEscapeHandling = StringEscapeHandling.EscapeHtml};
 
             using (var writer = new StreamWriter(jsonPath))
@@ -67,8 +73,15 @@ namespace MatplotlibCS
             }
             
             var psi = new ProcessStartInfo(_pythonExePath, $"{_dasPlotPyPath} \"{jsonPath}\"");
-            var process = Process.Start(psi);
-            process.WaitForExit();
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            psi.RedirectStandardInput = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+            var proc = Process.Start(psi);
+            proc.WaitForExit();
         } 
 
         #endregion

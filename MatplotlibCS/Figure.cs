@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace MatplotlibCS
 {
     /// <summary>
-    /// Описание окна с графиками
+    /// Class desribing a figure to be build
     /// </summary>
     [JsonObject(Title = "figure")]
     public class Figure
@@ -12,10 +13,10 @@ namespace MatplotlibCS
         #region ctor
 
         /// <summary>
-        /// Конструктор
+        /// .ctor
         /// </summary>
-        /// <param name="rows">Количество строк с графиками</param>
-        /// <param name="columns">Количество колонок с графиками</param>
+        /// <param name="rows">Number of rows in subplots grid</param>
+        /// <param name="columns">Number of columns in subplots grid</param>
         public Figure(int rows = 1, int columns = 1)
         {
             Rows = rows;
@@ -28,28 +29,34 @@ namespace MatplotlibCS
         #region Properties
 
         /// <summary>
-        /// Количество строк, на которое разбивается окно
+        /// Number of rows in subplots grid
         /// </summary>
         [JsonProperty(PropertyName = "rows")]
         public int Rows { get; set; } = 1;
 
         /// <summary>
-        /// Количество колонок, на которое разбивается окно
+        /// Number of columns in subplots grid
         /// </summary>
         [JsonProperty(PropertyName = "columns")]
         public int Columns { get; set; } = 1;
-        
+
         /// <summary>
-        /// Отдельные плоты (чарты) в пределах окна
+        /// Figuree subplots
         /// </summary>
         [JsonProperty(PropertyName = "subplots")]
         public List<Axes> Subplots { get; set; }
 
         /// <summary>
-        /// Имя файла, в который нужно сохранить графики
+        /// Name or full path of the file where to save result
         /// </summary>
         [JsonProperty(PropertyName = "filename")]
         public string FileName { get; set; }
+
+        /// <summary>
+        /// If true, matplotlib window won't be shown, only image will be saved to disk
+        /// </summary>
+        [JsonProperty(PropertyName = "onlySaveImage")]
+        public bool OnlySaveImage { get; set; }
 
         #endregion
     }

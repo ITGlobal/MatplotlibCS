@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Axes.cs" />
-    <Compile Include="DasPlot.cs" />
+    <Compile Include="MatplotlibCS.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="Histogram.cs" />
     <Compile Include="Line2D.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Python\dasPlot.py" />
+    <Content Include="Python\matplotlib_cs.py" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

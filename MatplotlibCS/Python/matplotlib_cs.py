@@ -51,9 +51,11 @@ def main(args):
                 plot_histogram(item)
 
     plot.tight_layout()
-    plot.show()
 
     save_figure_to_file(task)
+
+    if not task["onlySaveImage"]:
+        plot.show()
 
 
 def save_figure_to_file(task):
@@ -66,6 +68,7 @@ def save_figure_to_file(task):
     :return:
     """
     if "filename" in task and task["filename"] is not None:
+        print ("Saving figure to file {0}".format(task["filename"]))
         plot.savefig(task["filename"], dpi=300)
 
 
