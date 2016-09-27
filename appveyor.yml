@@ -8,3 +8,8 @@ build_script:
 test: off
 artifacts:
 - path: artifacts\**\*.*
+deploy:
+- provider: NuGet
+  api_key:
+    secure: MKJFwv0jwKlFm07R0ToinHoLs3g8z0oCjC1pAj48ISSxEWIZ4wGI30AZqOrkMcVc
+  skip_symbols: true
