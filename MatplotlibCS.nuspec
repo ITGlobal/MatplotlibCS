@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ITGlobal/MatplotlibCS</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# wrapper which allows to easily build charts using Python Matplotlib</description>
-    <releaseNotes>The first version of the utility.</releaseNotes>
+    <releaseNotes>Stable version with ability to plot 2D lines and histograms.</releaseNotes>
     <copyright>Copyright 2016</copyright>
     <tags>c# matplotlib plot chart charting</tags>
     <dependencies>
