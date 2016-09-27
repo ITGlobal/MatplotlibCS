@@ -43,7 +43,7 @@ def main(args):
         for item in subplot["items"]:
             axes = subplots[subplot["index"]]
             plot.sca(axes)
-            set_titles(task)
+            set_titles(subplot)
 
             if item["type"] == "Line2D":
                 plot_line2d(item)

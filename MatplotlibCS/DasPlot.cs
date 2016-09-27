@@ -41,7 +41,7 @@ namespace MatplotlibCS
         /// <param name="pythonExePath">Путь python.exe</param>
         /// <param name="dasPlotPyPath">Путь dasPlot.py</param>
         /// <param name="jsonTempPath">Опциональный путь директории, в которой хранятся временные json файлы, через которые передаются данные</param>
-        public DasPlot(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\dasPlot")
+        public DasPlot(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\MatplotlibCS")
         {
             _pythonExePath = pythonExePath;
             _dasPlotPyPath = dasPlotPyPath;

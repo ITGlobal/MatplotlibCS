@@ -77,7 +77,6 @@ namespace Examples
             dasPlot.DoTask(figure);
 
             #endregion
-
         }
     }
 }

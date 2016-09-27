@@ -29,7 +29,7 @@ namespace MatplotlibCS
         /// <summary>
         /// Заголовок осей
         /// </summary>
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty(PropertyName = "title", DefaultValueHandling = DefaultValueHandling.Include)]
         public string Title { get; set; }
 
         /// <summary>
