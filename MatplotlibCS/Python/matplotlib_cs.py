@@ -5,25 +5,27 @@ import matplotlib.pyplot as plot
 import matplotlib.patches as patches
 import numpy as np
 from matplotlib import rc
-
+from flask import Flask, url_for, request, json, Response, abort, jsonify
 # Script builds a matplotlib figure based on information, passed to it through json file.
 # Path to the JSON must be passed in first command line argument.
 
 # a trick to enable text labels in cyrillic
 rc('font', **{'sans-serif': 'Arial','family': 'sans-serif'})
 
+app = Flask(__name__)
+
 
 def main(args):
+    host = "127.0.0.1"
+    app.run(host=host, port=57123)
 
-    if len(args) == 0:
-        print("No input path to json passed")
-        input("Press Enter to continue...")
-        return
+@app.route('/', methods=['POST', 'GET'])
+def api_check_alive():
+    return '', 200
 
-    print(args[0])
-
-    f = open(args[0], 'r')
-    json_raw = f.read()
+@app.route('/plot', methods=['POST', 'GET'])
+def api_plot():
+    json_raw = request.json
     task = json.loads(json_raw)
 
     fig = plot.figure()
@@ -54,9 +56,14 @@ def main(args):
 
     save_figure_to_file(task)
 
-    if not task["onlySaveImage"]:
+    if task["onlySaveImage"] == False:
         plot.show()
 
+    # plot.show()
+
+@app.route('/kill', methods=['POST', 'GET'])
+def api_kill():
+    raise RuntimeError('Stop web service')
 
 def save_figure_to_file(task):
     """

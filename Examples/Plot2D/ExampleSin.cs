@@ -58,7 +58,8 @@ namespace Examples.Plot2D
                 }
             };
 
-            dasPlot.BuildFigure(figure);
+            var t = dasPlot.BuildFigure(figure);
+            t.Wait();
 
             #endregion
         }
