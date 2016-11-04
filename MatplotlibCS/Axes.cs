@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MatplotlibCS.PlotItems;
 using Newtonsoft.Json;
 
 namespace MatplotlibCS
@@ -51,9 +52,15 @@ namespace MatplotlibCS
         public int Index { get; set; } = 1;
 
         /// <summary>
+        /// Plot grid settings
+        /// </summary>
+        [JsonProperty(PropertyName = "grid")]
+        public Grid Grid { get; set; }
+
+        /// <summary>
         /// Lines and other plot items
         /// </summary>
-        [JsonProperty(PropertyName = "items")]
+        [JsonProperty(PropertyName = "__items__")]
         public List<PlotItem> PlotItems { get; set; }
 
         #endregion

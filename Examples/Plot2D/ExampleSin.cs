@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MatplotlibCS;
+using MatplotlibCS.PlotItems;
 
 namespace Examples.Plot2D
 {
@@ -18,14 +19,20 @@ namespace Examples.Plot2D
 
             const int N = 100;
             var X = new double[N];
-            var Y = new double[N];
+            var Y1 = new double[N];
+            var Y2 = new double[N];
             var x = 0.0;
             const double h = 2 * Math.PI / N;
+            var rnd = new Random();
             for (var i = 0; i < N; i++)
             {
                 var y = Math.Sin(x);
                 X[i] = x;
-                Y[i] = y;
+                Y1[i] = y;
+
+                y = Math.Sin(2 * x);
+                Y2[i] = y + rnd.NextDouble() / 10.0;
+
                 x += h;
             }
 
@@ -40,17 +47,50 @@ namespace Examples.Plot2D
             {
                 FileName = "ExampleSin.png",
                 OnlySaveImage = true,
+                DPI = 150,
                 Subplots =
                 {
                     new Axes(1, "The X axis", "The Y axis")
                     {
-                        Title = "ExampleSin",
+                        Title = "Example Sin",
+                        Grid = new Grid()
+                        {
+                            MinorAlpha = 0.2,
+                            MajorAlpha = 1.0,
+                            XMajorTicks = new[] {0.0, 7.6, 0.5},
+                            YMajorTicks = new[] {-1, 2.5, 0.25},
+                            XMinorTicks = new[] {0.0, 7.25, 0.25},
+                            YMinorTicks = new[] {-1, 2.5, 0.125}
+                        },
                         PlotItems =
                         {
                             new Line2D("Sin")
                             {
                                 X = X.ToList(),
-                                Y = Y.ToList()
+                                Y = Y1.ToList(),
+                                LineStyle = LineStyle.Dashed
+                            },
+
+                            new Line2D("Sin 2x")
+                            {
+                                X = X.ToList(),
+                                Y = Y2.ToList(),
+                                LineStyle = LineStyle.Solid,
+                                LineWidth = 0.5f,
+                                Color = Color.Green,
+                                Markevery = 5,
+                                MarkerSize = 10,
+                                Marker = Marker.Circle
+                            },
+
+                            new Text("Text annotation", 4.5, 0.76)
+                            {
+                                FontSize = 17
+                            },
+
+                            new Annotation("Arrow text annotation", 0.5, -0.7, 3, 0)
+                            {
+                                Color = Color.Blue
                             }
                         }
                     }

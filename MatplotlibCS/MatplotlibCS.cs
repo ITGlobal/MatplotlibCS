@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MatplotlibCS
 {
@@ -86,6 +87,13 @@ namespace MatplotlibCS
                 if (!Path.IsPathRooted(task.FileName))
                     task.FileName = Path.Combine(_jsonTempPath, task.FileName);
 
+                JsonConvert.DefaultSettings = (() =>
+                {
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    return settings;
+                });
+
                 var serializer = new JsonSerializer() { StringEscapeHandling = StringEscapeHandling.EscapeHtml };
                 var sb = new StringBuilder();
                 using (var writer = new StringWriter(sb))
@@ -93,9 +101,10 @@ namespace MatplotlibCS
                     serializer.Serialize(writer, task);
                 }
 
+                var json = sb.ToString();
                 using (var client = new HttpClient())
                 {
-                    var content = new StringContent(JsonConvert.SerializeObject(sb.ToString()), Encoding.UTF8, "application/json");
+                    var content = new StringContent(JsonConvert.SerializeObject(json), Encoding.UTF8, "application/json");
                     var response = await client.PostAsync(_serviceUrlPlotMethod, content);
                     var responseString = await response.Content.ReadAsStringAsync();
                 }
