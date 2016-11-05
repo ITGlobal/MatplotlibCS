@@ -22,6 +22,7 @@ namespace MatplotlibCS
             this.XTitle = xtitle;
             this.YTitle = ytitle;
             PlotItems = new List<PlotItem>();
+            Grid = new Grid();
         }
         #endregion
 
