@@ -157,7 +157,7 @@ namespace MatplotlibCS
                 response.Close();
                 return (response.StatusCode == HttpStatusCode.OK);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Any exception will returns false.
                 return false;

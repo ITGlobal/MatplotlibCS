@@ -52,7 +52,7 @@ namespace Examples.Plot2D
                 {
                     new Axes(1, "The X axis", "The Y axis")
                     {
-                        Title = "Example Sin",
+                        Title = "Sin(x), Sin(2x), VLines, HLines, Annotations",
                         Grid = new Grid()
                         {
                             MinorAlpha = 0.2,
@@ -91,7 +91,10 @@ namespace Examples.Plot2D
                             new Annotation("Arrow text annotation", 0.5, -0.7, 3, 0)
                             {
                                 Color = Color.Blue
-                            }
+                            },
+
+                            new Vline("vert line", 3.0, -1, 1),
+                            new Hline("hrzt line", new[] {0.1, 0.25, 0.375}, 0, 5) {LineStyle = LineStyle.Dashed, Color = Color.Magenta}
                         }
                     }
 
