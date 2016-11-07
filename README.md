@@ -11,7 +11,7 @@ A tiny library for utilizing Matplotlib Python charting library from C#. The gen
 3. Call MatplotlibCS instance BuildFigure method to plot the figure.
 
 #Examples#
-![ExampleSin](/Examples/Images/ExampleSin.png)
+![ExampleSin](http://i.imgur.com/SXUEFCT.png)
 
 ```C#
 // init engine with right paths 
