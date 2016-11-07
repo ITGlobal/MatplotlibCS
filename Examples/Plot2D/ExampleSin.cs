@@ -41,7 +41,7 @@ namespace Examples.Plot2D
             #region create plot
 
             // init engine with right paths 
-            var dasPlot = new MatplotlibCS.MatplotlibCS(pythonExePath, dasPlotPyPath);
+            var matplotlibCs = new MatplotlibCS.MatplotlibCS(pythonExePath, dasPlotPyPath);
 
             var figure = new Figure(1, 1)
             {
@@ -101,7 +101,7 @@ namespace Examples.Plot2D
                 }
             };
 
-            var t = dasPlot.BuildFigure(figure);
+            var t = matplotlibCs.BuildFigure(figure);
             t.Wait();
 
             #endregion
