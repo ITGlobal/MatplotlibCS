@@ -14,7 +14,7 @@ A tiny library for utilizing Matplotlib Python charting library from C#. The gen
 ![ExampleSin](http://i.imgur.com/SXUEFCT.png)
 
 ```C#
-// init engine with right paths 
+// Init engine with right paths 
 var matplotlibCs = new MatplotlibCS.MatplotlibCS(pythonExePath, dasPlotPyPath);
 
 var figure = new Figure(1, 1)
