@@ -5,50 +5,52 @@ import matplotlib.pyplot as plot
 import matplotlib.patches as patches
 import numpy as np
 from matplotlib import rc
-
+from flask import Flask, url_for, request, json, Response, abort, jsonify
 # Script builds a matplotlib figure based on information, passed to it through json file.
 # Path to the JSON must be passed in first command line argument.
 
 # a trick to enable text labels in cyrillic
+from task import Task
+
 rc('font', **{'sans-serif': 'Arial','family': 'sans-serif'})
+
+app = Flask(__name__)
 
 
 def main(args):
+    host = "127.0.0.1"
+    app.run(host=host, port=57123)
 
-    if len(args) == 0:
-        print("No input path to json passed")
-        input("Press Enter to continue...")
-        return
+@app.route('/', methods=['POST', 'GET'])
+def api_check_alive():
+    return '', 200
 
-    print(args[0])
-
-    f = open(args[0], 'r')
-    json_raw = f.read()
+@app.route('/plot', methods=['POST', 'GET'])
+def api_plot():
+    json_raw = request.json
     task = json.loads(json_raw)
+    t = Task(task)
 
-    fig = plot.figure()
+    fig = plot.figure(figsize=[t.w/(1.0*t.dpi), t.h/(1.0*t.dpi)])
 
     # precreate, make basic settings and save subplots
     subplots = {}
     subplot_index = 1
-    for i in range(0, task["rows"]):
-        for j in range(0, task["columns"]):
-            axes = fig.add_subplot(task["rows"], task["columns"], subplot_index)
+    for i in range(0, t.rows):
+        for j in range(0, t.columns):
+            axes = fig.add_subplot(t.rows, t.columns, subplot_index)
             subplots[subplot_index] = axes
-            set_grid(axes)
+            # set_grid(axes)
             subplot_index += 1
 
     # draw items on each subplot
-    for subplot in task["subplots"]:
-        for item in subplot["items"]:
-            axes = subplots[subplot["index"]]
-            plot.sca(axes)
-            set_titles(subplot)
-
-            if item["type"] == "Line2D":
-                plot_line2d(item)
-            elif item["type"] == "Histogram":
-                plot_histogram(item)
+    for subplot in t.subplots:
+        axes = subplots[subplot.index]
+        plot.sca(axes)
+        set_titles(subplot)
+        set_grid(axes, subplot.grid)
+        for item in subplot.items:
+            item.plot()
 
     plot.tight_layout()
 
@@ -57,6 +59,11 @@ def main(args):
     if not task["onlySaveImage"]:
         plot.show()
 
+    # plot.show()
+
+@app.route('/kill', methods=['POST', 'GET'])
+def api_kill():
+    raise RuntimeError('Stop web service')
 
 def save_figure_to_file(task):
     """
@@ -71,42 +78,33 @@ def save_figure_to_file(task):
         print ("Saving figure to file {0}".format(task["filename"]))
         plot.savefig(task["filename"], dpi=300)
 
-
-def plot_line2d(line):
-    """
-    Plots simple 2D line
-    :param line: Line description dict
-    :return:
-    """
-    c = 'r' if "color" not in line else line["color"]
-    m = '' if "marker" not in line else line["marker"]
-    lw = 1 if "lineWidth" not in line else line["lineWidth"]
-    ms = 1 if "markerSize" not in line else line["markerSize"]
-    ls = '-' if "lineStyle" not in line else line["lineStyle"]
-    plot.plot(line["x"], line["y"], color=c, marker=m, lw=lw, ms=ms, ls=ls)
-    plot.hold(True)
-
-
-def plot_histogram(hist):
-    """
-    Plots simple 2D histogram
-    :param hist:
-    :return:
-    """
-    plot.hist(hist["y"], 50)
-    plot.hold(True)
-
-
-def set_grid(axes):
+def set_grid(axes, grid):
     """
     Setup axes grid
     :param axes:
     :return:
     """
-    axes.grid(which='both')
-    axes.grid(which='minor', alpha=0.2)
-    axes.grid(which='major', alpha=0.5)
-    axes.grid('on')
+    axes.grid(which=grid.which)
+    axes.grid(which='minor', alpha=grid.minor_alpha)
+    axes.grid(which='major', alpha=grid.major_alpha)
+    axes.grid(grid.on)
+
+    # def ticks(self, xmajor, ymajor, xminor=None, yminor=None):
+    if grid.x_major_ticks is not None:
+        major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])
+        axes.set_xticks(major_ticks)
+
+    if grid.x_minor_ticks is not None:
+        minor_ticks = np.arange(grid.x_minor_ticks[0], grid.x_minor_ticks[1]+grid.x_minor_ticks[2], grid.x_minor_ticks[2])
+        axes.axes.set_xticks(minor_ticks, minor=True)
+
+    if grid.y_major_ticks is not None:
+        major_ticks = np.arange(grid.y_major_ticks[0], grid.y_major_ticks[1]+grid.y_major_ticks[2], grid.y_major_ticks[2])
+        axes.set_yticks(major_ticks)
+
+    if grid.y_minor_ticks is not None:
+        minor_ticks = np.arange(grid.y_minor_ticks[0], grid.y_minor_ticks[1]+grid.y_minor_ticks[2], grid.y_minor_ticks[2])
+        axes.set_yticks(minor_ticks, minor=True)
 
 
 def set_titles(task):
@@ -116,9 +114,9 @@ def set_titles(task):
     :param task:
     :return:
     """
-    plot.title(u"{0}".format(task["title"]))
-    plot.ylabel(task["xtitle"])
-    plot.xlabel(task["ytitle"])
+    plot.title(u"{0}".format(task.title))
+    plot.ylabel(task.xtitle)
+    plot.xlabel(task.ytitle)
 
 # entry point
 if __name__ == "__main__":

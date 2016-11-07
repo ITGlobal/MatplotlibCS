@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace MatplotlibCS
 {
@@ -32,6 +35,21 @@ namespace MatplotlibCS
         /// </summary>
         private string _jsonTempPath;
 
+        /// <summary>
+        /// Python web service URL
+        /// </summary>
+        private string _serviceUrlCheckAliveMethod = "http://127.0.0.1:57123/";
+
+        /// <summary>
+        /// Python web service URL
+        /// </summary>
+        private string _serviceUrlPlotMethod = "http://127.0.0.1:57123/plot";
+
+        /// <summary>
+        /// Kill web service url
+        /// </summary>
+        private string _serviceUrlKillMethod = "http://127.0.0.1:57123/kill";
+
         #endregion
 
         #region .ctor
@@ -42,11 +60,14 @@ namespace MatplotlibCS
         /// <param name="pythonExePath">Путь python.exe</param>
         /// <param name="dasPlotPyPath">Путь dasPlot.py</param>
         /// <param name="jsonTempPath">Опциональный путь директории, в которой хранятся временные json файлы, через которые передаются данные</param>
-        public MatplotlibCS(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\temp\\MatplotlibCS")
+        public MatplotlibCS(string pythonExePath, string dasPlotPyPath, string jsonTempPath = "c:\\MatplotlibCS")
         {
             _pythonExePath = pythonExePath;
             _dasPlotPyPath = dasPlotPyPath;
             _jsonTempPath = jsonTempPath;
+
+            if (!Directory.Exists(_jsonTempPath))
+                Directory.CreateDirectory(_jsonTempPath);
         }
 
         #endregion
@@ -57,36 +78,91 @@ namespace MatplotlibCS
         /// Выполняет задачу построения графиков
         /// </summary>
         /// <param name="task">Описание задачи</param>
-        public void BuildFigure(Figure task)
+        public async Task BuildFigure(Figure task)
         {
-            var jsonPath = GetNewJsonPath();
-
-            // if only file name was given, without full path, then save file into JSON temp folder
-            if (!Path.IsPathRooted(task.FileName))
-                task.FileName = Path.Combine(_jsonTempPath, task.FileName);
-
-            var serializer = new JsonSerializer() {StringEscapeHandling = StringEscapeHandling.EscapeHtml};
-
-            using (var writer = new StreamWriter(jsonPath))
+            try
             {
-                serializer.Serialize(writer, task);
-            }
-            
-            var psi = new ProcessStartInfo(_pythonExePath, $"{_dasPlotPyPath} \"{jsonPath}\"");
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            psi.RedirectStandardInput = true;
-            psi.UseShellExecute = false;
-            psi.CreateNoWindow = true;
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
+                LaunchPythonWebService();
 
-            var proc = Process.Start(psi);
-            proc.WaitForExit();
-        } 
+                if (!Path.IsPathRooted(task.FileName))
+                    task.FileName = Path.Combine(_jsonTempPath, task.FileName);
+
+                JsonConvert.DefaultSettings = (() =>
+                {
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    return settings;
+                });
+
+                var serializer = new JsonSerializer() { StringEscapeHandling = StringEscapeHandling.EscapeHtml };
+                var sb = new StringBuilder();
+                using (var writer = new StringWriter(sb))
+                {
+                    serializer.Serialize(writer, task);
+                }
+
+                var json = sb.ToString();
+                using (var client = new HttpClient())
+                {
+                    var content = new StringContent(JsonConvert.SerializeObject(json), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(_serviceUrlPlotMethod, content);
+                    var responseString = await response.Content.ReadAsStringAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         #endregion
 
         #region Private methods
+
+        /// <summary>
+        /// Check if python web service is alive and if no, launches it
+        /// </summary>
+        private void LaunchPythonWebService()
+        {
+            if (!CheckIfWebServiceIsUpAndRunning())
+            {
+                var psi = new ProcessStartInfo(_pythonExePath, _dasPlotPyPath)
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    RedirectStandardInput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                Process.Start(psi);
+            }
+        }
+
+        /// <summary>
+        /// Check if python web service is alive
+        /// </summary>
+        /// <returns>true if service is up and running</returns>
+        private bool CheckIfWebServiceIsUpAndRunning()
+        {
+            try
+            {
+                //Creating the HttpWebRequest
+                var request = WebRequest.Create(_serviceUrlCheckAliveMethod) as HttpWebRequest;
+                //Setting the Request method HEAD, you can also use GET too.
+                request.Method = "GET";
+                //Getting the Web Response.
+                var response = request.GetResponse() as HttpWebResponse;
+                //Returns TRUE if the Status code == 200
+                response.Close();
+                return (response.StatusCode == HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                //Any exception will returns false.
+                return false;
+            }
+        }
 
         /// <summary>
         /// Возвращает новый путь, по которому можно сохранить json задачи

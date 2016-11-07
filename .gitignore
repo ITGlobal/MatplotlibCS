@@ -215,3 +215,5 @@ MatplotlibCS/Python/.idea/
 
 #CAKE
 tools
+*.pyc
+out/

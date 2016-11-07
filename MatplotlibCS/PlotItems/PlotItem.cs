@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MatplotlibCS
+namespace MatplotlibCS.PlotItems
 {
     /// <summary>
     /// Базовый класс для элементов, которые отрисовываются на графике

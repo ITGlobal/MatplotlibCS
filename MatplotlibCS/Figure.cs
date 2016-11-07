@@ -43,7 +43,7 @@ namespace MatplotlibCS
         /// <summary>
         /// Figuree subplots
         /// </summary>
-        [JsonProperty(PropertyName = "subplots")]
+        [JsonProperty(PropertyName = "__subplots__")]
         public List<Axes> Subplots { get; set; }
 
         /// <summary>
@@ -58,6 +58,24 @@ namespace MatplotlibCS
         [JsonProperty(PropertyName = "onlySaveImage")]
         public bool OnlySaveImage { get; set; }
 
+        /// <summary>
+        /// Dots per inch
+        /// </summary>
+        [JsonProperty(PropertyName = "dpi")]
+        public int DPI { get; set; } = 300;
+
+        /// <summary>
+        /// Image width
+        /// </summary>
+        [JsonProperty(PropertyName = "w")]
+        public int Width { get; set; } = 1920;
+
+        /// <summary>
+        /// Image height
+        /// </summary>
+        [JsonProperty(PropertyName = "h")]
+        public int Height { get; set; } = 1080;
+        
         #endregion
     }
 }

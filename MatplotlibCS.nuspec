@@ -22,5 +22,6 @@
     <file src="out\MatplotlibCS.dll" target="lib\net45" />
     <file src="out\MatplotlibCS.xml" target="lib\net45" />
     <file src="out\MatplotlibCS.pdb" target="lib\net45" />
+    <file src="out\Python\*" target="content\MatplotlibCS" />
   </files>
 </package>
