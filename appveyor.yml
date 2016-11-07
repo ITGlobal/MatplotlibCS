@@ -1,5 +1,10 @@
 version: 1.0.{build}
 configuration: Release
+branches:
+  only:
+  - master
+build:
+  verbosity: minimal
 cache: 
 - 'C:\projects\MatplotlibCS\tools'
 - 'C:\projects\MatplotlibCS\packages'
