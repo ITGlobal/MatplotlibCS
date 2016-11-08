@@ -5,7 +5,7 @@ class Hline:
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
 
-    def plot(self):
+    def plot(self, axes):
         plot.hlines(self.y,
                     self.xmin,
                     self.xmax,

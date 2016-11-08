@@ -1,4 +1,5 @@
 from annotations import Text, Annotation
+from arc import Arc
 from histogram import Histogram
 from hline import Hline
 from line_2d import Line2D
@@ -29,6 +30,8 @@ class Subplot:
                     self.items.append(Hline(item))
                 elif item["type"] == "Vline":
                     self.items.append(Vline(item))
+                elif item["type"] == "Arc":
+                    self.items.append(Arc(item))
 
         if "grid" in jsonDict:
             self.grid = Grid(jsonDict["grid"])

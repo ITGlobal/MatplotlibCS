@@ -21,7 +21,7 @@ namespace Examples
         /// <summary>
         /// Path to dasPlot.py, script which finally builds plots
         /// </summary>
-        private static string _dasPlotPyPath;
+        private static string _matplotlibPyPath;
 
         static void Main(string[] args)
         {
@@ -33,9 +33,10 @@ namespace Examples
             }
 
             _pythonExePath = args[0];
-            _dasPlotPyPath = args[1];
+            _matplotlibPyPath = args[1];
 
-            ExampleSin.Run(_pythonExePath, _dasPlotPyPath);
+            ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
+            ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
         }
     }
 }

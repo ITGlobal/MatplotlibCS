@@ -50,7 +50,7 @@ def api_plot():
         set_titles(subplot)
         set_grid(axes, subplot.grid)
         for item in subplot.items:
-            item.plot()
+            item.plot(axes)
 
     plot.tight_layout()
 

@@ -6,7 +6,7 @@ class Text:
         self.color = 'k'
         self.__dict__ = jsonDict
 
-    def plot(self):
+    def plot(self, axes):
         plot.text(self.x,
                   self.y,
                   self.text,
@@ -19,7 +19,7 @@ class Annotation:
         self.color = 'k'
         self.__dict__ = jsonDict
 
-    def plot(self):
+    def plot(self, axes):
         plot.annotate(self.text,
                       xy=(self.arrow_x, self.arrow_y),
                       xycoords='data',

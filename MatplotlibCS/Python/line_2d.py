@@ -5,7 +5,7 @@ class Line2D:
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
 
-    def plot(self):
+    def plot(self, axes):
         line = self.__dict__
         # c = 'r' if "color" not in line else line["color"]
         # m = '' if "marker" not in line else line["marker"]

@@ -39,7 +39,7 @@ namespace MatplotlibCS.PlotItems
         /// </summary>
         [JsonProperty(PropertyName = "color")]
         [JsonConverter(typeof(StringEnumConverter))]
-        public Color Color { get; set; } = Color.Blue;
+        public Color Color { get; set; } = Color.Black;
 
         /// <summary>
         /// Маркер точки

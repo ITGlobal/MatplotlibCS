@@ -52,6 +52,7 @@
     <Compile Include="MatplotlibCS.cs" />
     <Compile Include="Figure.cs" />
     <Compile Include="PlotItems\Annotation.cs" />
+    <Compile Include="PlotItems\Arc.cs" />
     <Compile Include="PlotItems\Enums.cs" />
     <Compile Include="PlotItems\Histogram.cs" />
     <Compile Include="PlotItems\Hline.cs" />

@@ -5,7 +5,7 @@ class Vline:
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
 
-    def plot(self):
+    def plot(self, axes):
         plot.vlines(self.x,
                     self.ymin,
                     self.ymax,
