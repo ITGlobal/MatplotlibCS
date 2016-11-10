@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Examples.Plot2D;
 using MatplotlibCS;
 
 namespace Examples
@@ -20,75 +21,22 @@ namespace Examples
         /// <summary>
         /// Path to dasPlot.py, script which finally builds plots
         /// </summary>
-        private static string _dasPlotPyPath;
+        private static string _matplotlibPyPath;
 
         static void Main(string[] args)
         {
             if (args.Length != 2)
             {
-                Console.WriteLine("You must specify path to python.exe and to dasPlot.py in command line arguments");
+                Console.WriteLine("You must specify path to python.exe and to matplotlib_cs.py in command line arguments");
                 Console.ReadKey();
                 return;
             }
 
             _pythonExePath = args[0];
-            _dasPlotPyPath = args[1];
+            _matplotlibPyPath = args[1];
 
-            ExampleSin();
-        }
-
-        /// <summary>
-        /// Chart of sin
-        /// </summary>
-        static void ExampleSin()
-        {
-            #region create test data
-
-            const int N = 100;
-            var X = new double[N];
-            var Y = new double[N];
-            var x = 0.0;
-            const double h = 2 * Math.PI / N;
-            for (var i = 0; i < N; i++)
-            {
-                var y = Math.Sin(x);
-                X[i] = x;
-                Y[i] = y;
-                x += h;
-            }
-
-            #endregion
-
-            #region create plot
-
-            // init engine with right paths 
-            var dasPlot = new MatplotlibCS.MatplotlibCS(_pythonExePath, _dasPlotPyPath);
-
-            var figure = new Figure(1, 1)
-            {
-                FileName = "ExampleSin.png",
-                OnlySaveImage = true,
-                Subplots =
-                {
-                    new Axes(1, "The X axis", "The Y axis")
-                    {
-                        Title = "ExampleSin",
-                        PlotItems =
-                        {
-                            new Line2D("Sin")
-                            {
-                                X = X.ToList(),
-                                Y = Y.ToList()
-                            }
-                        }
-                    }
-
-                }
-            };
-
-            dasPlot.BuildFigure(figure);
-
-            #endregion
+            ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
+            ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
         }
     }
 }

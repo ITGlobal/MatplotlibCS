@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace MatplotlibCS
+namespace MatplotlibCS.PlotItems
 {
     /// <summary></summary>
     public class Histogram : PlotItem

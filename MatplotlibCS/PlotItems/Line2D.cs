@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace MatplotlibCS
+namespace MatplotlibCS.PlotItems
 {
     /// <summary>
     /// Описание линии графика
@@ -34,17 +35,18 @@ namespace MatplotlibCS
         public string Name { get; set; }
 
         /// <summary>
-        /// Название цвета
+        /// Line color
         /// </summary>
         [JsonProperty(PropertyName = "color")]
-        public string Color { get; set; } = "b";
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Color Color { get; set; } = Color.Black;
 
         /// <summary>
         /// Маркер точки
-        /// [ '+' | ',' | '.' | '1' | '2' | '3' | '4' ]
         /// </summary>
         [JsonProperty(PropertyName = "marker")]
-        public string Marker { get; set; } = "";
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Marker Marker { get; set; } = Marker.None;
 
         /// <summary>
         /// Размер маркера
@@ -60,11 +62,17 @@ namespace MatplotlibCS
         
         /// <summary>
         /// Маркер точки
-        /// [ '-' | '--' | '-.' | ':' | 'steps' | ...]
         /// </summary>
         [JsonProperty(PropertyName = "lineStyle")]
-        public string LineStyle { get; set; } = "-";
-        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LineStyle LineStyle { get; set; } = LineStyle.Solid;
+
+        /// <summary>
+        /// e.g., if Markevery=5, every 5-th marker will be plotted.
+        /// </summary>
+        [JsonProperty(PropertyName = "markevery")]
+        public int Markevery { get; set; } = 1;
+
         /// <summary>
         /// Данные для графика, аргумент
         /// </summary>

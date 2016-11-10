@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,15 +48,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Axes.cs" />
+    <Compile Include="Grid.cs" />
     <Compile Include="MatplotlibCS.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="Histogram.cs" />
-    <Compile Include="Line2D.cs" />
-    <Compile Include="PlotItem.cs" />
+    <Compile Include="PlotItems\Annotation.cs" />
+    <Compile Include="PlotItems\Arc.cs" />
+    <Compile Include="PlotItems\Enums.cs" />
+    <Compile Include="PlotItems\Histogram.cs" />
+    <Compile Include="PlotItems\Hline.cs" />
+    <Compile Include="PlotItems\Line2D.cs" />
+    <Compile Include="PlotItems\PlotItem.cs" />
+    <Compile Include="PlotItems\Text.cs" />
+    <Compile Include="PlotItems\Vline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Python\matplotlib_cs.py" />
+    <Content Include="Python\annotations.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\histogram.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\hline.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\line_2d.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\matplotlib_cs.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\subplot.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\task.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Python\vline.py">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
