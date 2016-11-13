@@ -17,9 +17,8 @@ namespace MatplotlibCS.PlotItems
         /// </summary>
         /// <param name="name">Название линии</param>
         /// 
-        public Line2D(string name)
+        public Line2D(string name) : base(name)
         {
-            Name = name;
             X = new List<double>();
             Y = new List<double>();
         }
@@ -27,12 +26,6 @@ namespace MatplotlibCS.PlotItems
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Название линии
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
 
         /// <summary>
         /// Line color

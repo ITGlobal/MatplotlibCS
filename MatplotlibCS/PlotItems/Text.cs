@@ -13,7 +13,7 @@ namespace MatplotlibCS.PlotItems
     /// </summary>
     public class Text : PlotItem
     {
-        public Text(string text, double x, double y)
+        public Text(string name, string text, double x, double y) : base(name)
         {
             this.X = x;
             this.Y = y;

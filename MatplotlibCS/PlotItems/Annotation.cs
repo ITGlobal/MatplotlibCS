@@ -13,7 +13,7 @@ namespace MatplotlibCS.PlotItems
     /// </summary>
     public class Annotation : PlotItem
     {
-        public Annotation(string text, double textX, double textY, double arrowX, double arrowY)
+        public Annotation(string name, string text, double textX, double textY, double arrowX, double arrowY) : base(name)
         {
             this.Text = text;
             TextLeftCornerX = textX;
@@ -30,7 +30,7 @@ namespace MatplotlibCS.PlotItems
 
         [JsonProperty(PropertyName = "text_y")]
         public double TextLeftCornerY { get; set; }
-        
+
         [JsonProperty(PropertyName = "arrow_x")]
         public double ArrowX { get; set; }
 
