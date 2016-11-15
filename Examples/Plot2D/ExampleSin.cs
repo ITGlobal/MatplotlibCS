@@ -83,12 +83,12 @@ namespace Examples.Plot2D
                                 Marker = Marker.Circle
                             },
 
-                            new Text("Text annotation", 4.5, 0.76)
+                            new Text("ant1", "Text annotation", 4.5, 0.76)
                             {
                                 FontSize = 17
                             },
 
-                            new Annotation("Arrow text annotation", 0.5, -0.7, 3, 0)
+                            new Annotation("ant2","Arrow text annotation", 0.5, -0.7, 3, 0)
                             {
                                 Color = Color.Blue
                             },

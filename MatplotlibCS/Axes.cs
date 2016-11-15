@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MatplotlibCS.PlotItems;
 using Newtonsoft.Json;
 
@@ -21,8 +23,8 @@ namespace MatplotlibCS
             this.Index = index;
             this.XTitle = xtitle;
             this.YTitle = ytitle;
-            PlotItems = new List<PlotItem>();
             Grid = new Grid();
+            PlotItems = new List<PlotItem>();
         }
         #endregion
 
@@ -59,10 +61,25 @@ namespace MatplotlibCS
         public Grid Grid { get; set; }
 
         /// <summary>
-        /// Lines and other plot items
+        /// Lines and other plot items. Never add items to this list directly, only set the list itself. For adding/removing
+        /// items use AddItem/RemoveItem methods
         /// </summary>
         [JsonProperty(PropertyName = "__items__")]
         public List<PlotItem> PlotItems { get; set; }
+
+        #endregion
+
+        #region Indexers
+
+        /// <summary>
+        /// Returnts first plot item by its name
+        /// </summary>
+        /// <param name="name">Name of an item</param>
+        /// <returns></returns>
+        public PlotItem this[string name]
+        {
+            get { return PlotItems.FirstOrDefault(_ => _.Name == name); }
+        }
 
         #endregion
     }

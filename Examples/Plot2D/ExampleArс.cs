@@ -68,9 +68,9 @@ namespace Examples.Plot2D
                             new Arc("", 0, 0, 0.6, 0.6, 0, 0, 90) {Color = Color.Magenta},
                             new Arc("", 0, 0, 0.7, 0.7, 0, 0, 135) {Color = Color.Green},
 
-                            new Text("45", 0.1, 0.04),
-                            new Annotation("90", 0.2, 0.6, 0.11, 0.26),
-                            new Annotation("135", -0.2, 0.6, -0.08, 0.32),
+                            new Text("ant1","45", 0.1, 0.04),
+                            new Annotation("ant2","90", 0.2, 0.6, 0.11, 0.26),
+                            new Annotation("ant3","135", -0.2, 0.6, -0.08, 0.32),
 
                             new Hline("0", 0, -1, 1) {LineStyle = LineStyle.Solid, Color = Color.Black}
                         }

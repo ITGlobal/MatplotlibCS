@@ -37,6 +37,7 @@ namespace Examples
 
             ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
             ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
+            ExampleVisibility.Run(_pythonExePath, _matplotlibPyPath);
         }
     }
 }
