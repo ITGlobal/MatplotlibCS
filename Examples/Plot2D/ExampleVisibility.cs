@@ -44,7 +44,14 @@ namespace Examples.Plot2D
                                 LineStyle = LineStyle.Solid,
                                 Color = Color.Red,
                                 IsVisible = false // set this line invisible for first image
-                            }
+                            },
+                            new Point2D("plus", 0.5, -0.5)
+                            {
+                                Marker = Marker.Circle,
+                                MarkerSize = 10,
+                                Color = Color.Green,
+                                LineWidth = 2
+                            },
                         }
                     }
                 }

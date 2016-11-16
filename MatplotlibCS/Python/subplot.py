@@ -20,6 +20,8 @@ class Subplot:
             for item in jsonDict["__items__"]:
                 if item["type"] == "Line2D":
                     self.items.append(Line2D(item))
+                elif item["type"] == "Point2D":
+                    self.items.append(Line2D(item))
                 elif item["type"] == "Histogram":
                     self.items.append(Histogram(item))
                 elif item["type"] == "Text":
