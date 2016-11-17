@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -136,6 +137,10 @@ namespace MatplotlibCS
                     WindowStyle = ProcessWindowStyle.Hidden
                 };
                 Process.Start(psi);
+
+                // when starting python process, it's better to wait for some time to ensure, that 
+                // web service started
+                Thread.Sleep(2000);
             }
         }
 
