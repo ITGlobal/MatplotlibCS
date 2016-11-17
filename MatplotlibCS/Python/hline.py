@@ -9,7 +9,7 @@ class Hline:
         plot.hlines(self.y,
                     self.xmin,
                     self.xmax,
-                    color=self.color,
+                    color=self.color["value"],
                     lw=self.lineWidth,
                     linestyle=self.lineStyle)
         plot.hold(True)

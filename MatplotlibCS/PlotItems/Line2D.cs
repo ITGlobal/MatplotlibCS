@@ -31,7 +31,6 @@ namespace MatplotlibCS.PlotItems
         /// Line color
         /// </summary>
         [JsonProperty(PropertyName = "color")]
-        [JsonConverter(typeof(StringEnumConverter))]
         public Color Color { get; set; } = Color.Black;
 
         /// <summary>

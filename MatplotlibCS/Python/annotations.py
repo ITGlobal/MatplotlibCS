@@ -11,7 +11,7 @@ class Text:
                   self.y,
                   self.text,
                   size = self.fontSize,
-                  color = self.color)
+                  color = self.color["value"])
 
 class Annotation:
     def __init__(self, jsonDict):
@@ -25,9 +25,9 @@ class Annotation:
                       xycoords='data',
                       xytext=(self.text_x, self.text_y),
                       textcoords='data',
-                      color = self.color,
+                      color = self.color["value"],
                       arrowprops=dict(
-                          color = self.color,
+                          color = self.color["value"],
                           arrowstyle="->",
                           connectionstyle='arc3,rad=0',
                       )

@@ -13,7 +13,7 @@ class Arc:
                         angle=self.angle,
                         theta1=self.theta1,
                         theta2=self.theta2,
-                        color=self.color,
+                        color=self.color["value"],
                         linewidth=self.lineWidth)
         axes.add_patch(a)
         plot.hold(True)
