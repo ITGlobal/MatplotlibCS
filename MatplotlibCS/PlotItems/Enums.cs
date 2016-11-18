@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MatplotlibCS.PlotItems
 {
@@ -123,42 +124,41 @@ namespace MatplotlibCS.PlotItems
         [EnumMember(Value = "CARETDOWN")]
         Caretdown
     }
-
+    
     /// <summary>
-    /// b: blue
-    /// g: green
-    /// r: red
-    /// c: cyan
-    /// m: magenta
-    /// y: yellow
-    /// k: black
-    /// w: white
+    /// Colors
     /// </summary>
-    public enum Color
+    public class Color
     {
-        [EnumMember(Value = "k")]
-        Black,
+        [JsonProperty(PropertyName = "value")]
+        public string Value { get; private set; }
 
-        [EnumMember(Value = "r")]
-        Red,
+        public Color(string hexColor)
+        {
+            Value = hexColor;
+        }
 
-        [EnumMember(Value = "b")]
-        Blue,
+        public static implicit operator Color(string hexColor)
+        {
+            return new Color(hexColor);
+        }
 
-        [EnumMember(Value = "y")]
-        Yellow,
+        public static Color Blue = new Color("b");
 
-        [EnumMember(Value = "c")]
-        Cyan,
+        public static Color Black = new Color("k");
 
-        [EnumMember(Value = "g")]
-        Green,
+        public static Color Red = new Color("r");
 
-        [EnumMember(Value = "w")]
-        White,
+        public static Color Yellow = new Color("y");
 
-        [EnumMember(Value = "m")]
-        Magenta,
+        public static Color Cyan = new Color("c");
+
+        public static Color Green = new Color("g");
+
+        public static Color White = new Color("w");
+
+        public static Color Magenta = new Color("m");
+
     }
 
     /// <summary>

@@ -9,7 +9,7 @@ class Vline:
         plot.vlines(self.x,
                     self.ymin,
                     self.ymax,
-                    color=self.color,
+                    color=self.color["value"],
                     lw=self.lineWidth,
                     linestyle=self.lineStyle)
         plot.hold(True)

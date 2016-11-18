@@ -33,7 +33,6 @@ namespace MatplotlibCS.PlotItems
         public double FontSize { get; set; } = 12;
 
         [JsonProperty(PropertyName = "color")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Color Color { get; set; }
+        public Color Color { get; set; } = Color.Black;
     }
 }

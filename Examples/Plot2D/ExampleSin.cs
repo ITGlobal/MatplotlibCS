@@ -77,7 +77,7 @@ namespace Examples.Plot2D
                                 Y = Y2.ToList(),
                                 LineStyle = LineStyle.Solid,
                                 LineWidth = 0.5f,
-                                Color = Color.Green,
+                                Color = "r",
                                 Markevery = 5,
                                 MarkerSize = 10,
                                 Marker = Marker.Circle
@@ -90,7 +90,7 @@ namespace Examples.Plot2D
 
                             new Annotation("ant2","Arrow text annotation", 0.5, -0.7, 3, 0)
                             {
-                                Color = Color.Blue
+                                Color = "#00ff88"
                             },
 
                             new Vline("vert line", 3.0, -1, 1),

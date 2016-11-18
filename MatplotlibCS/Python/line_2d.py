@@ -15,7 +15,7 @@ class Line2D:
         # markevery = 1 if "markevery" not in line else line["markevery"]
         plot.plot(line["x"],
                   line["y"],
-                  color=self.color,
+                  color=self.color["value"],
                   marker=self.marker,
                   lw=self.lineWidth,
                   ms=self.markerSize,
