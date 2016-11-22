@@ -11,5 +11,6 @@ class Hline:
                     self.xmax,
                     color=self.color["value"],
                     lw=self.lineWidth,
-                    linestyle=self.lineStyle)
+                    linestyle=self.lineStyle,
+                    alpha=self.alpha)
         plot.hold(True)

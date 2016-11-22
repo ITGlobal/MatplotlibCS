@@ -20,5 +20,6 @@ class Line2D:
                   lw=self.lineWidth,
                   ms=self.markerSize,
                   ls=self.lineStyle,
-                  markevery=self.markevery)
+                  markevery=self.markevery,
+                  alpha = self.alpha)
         plot.hold(True)

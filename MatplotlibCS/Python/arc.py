@@ -14,6 +14,7 @@ class Arc:
                         theta1=self.theta1,
                         theta2=self.theta2,
                         color=self.color["value"],
-                        linewidth=self.lineWidth)
+                        linewidth=self.lineWidth,
+            alpha=self.alpha)
         axes.add_patch(a)
         plot.hold(True)

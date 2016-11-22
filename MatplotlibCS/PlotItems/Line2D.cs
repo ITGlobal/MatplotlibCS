@@ -34,6 +34,12 @@ namespace MatplotlibCS.PlotItems
         public Color Color { get; set; } = Color.Black;
 
         /// <summary>
+        /// Color transparency
+        /// </summary>
+        [JsonProperty(PropertyName = "alpha")]
+        public double Alpha { get; set; } = 1;
+
+        /// <summary>
         /// Маркер точки
         /// </summary>
         [JsonProperty(PropertyName = "marker")]
