@@ -13,6 +13,7 @@ class Line2D:
         # ms = 1 if "markerSize" not in line else line["markerSize"]
         # ls = '-' if "lineStyle" not in line else line["lineStyle"]
         # markevery = 1 if "markevery" not in line else line["markevery"]
+        label = self.name if self.show_legend else ""
         plot.plot(line["x"],
                   line["y"],
                   color=self.color["value"],
@@ -21,5 +22,6 @@ class Line2D:
                   ms=self.markerSize,
                   ls=self.lineStyle,
                   markevery=self.markevery,
-                  alpha = self.alpha)
+                  alpha=self.alpha,
+                  label=label)
         plot.hold(True)

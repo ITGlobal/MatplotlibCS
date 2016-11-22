@@ -29,10 +29,12 @@ namespace MatplotlibCS.PlotItems
             X = x;
             YMin = ymin;
             YMax = ymax;
+            ShowLegend = false;
         }
 
         public Vline(string name, double x, double ymin, double ymax) : this(name, new[] { x }, ymin, ymax)
         {
+            ShowLegend = false;
         }
     }
 }

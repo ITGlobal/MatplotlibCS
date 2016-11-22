@@ -60,13 +60,22 @@ namespace MatplotlibCS
         [JsonProperty(PropertyName = "grid")]
         public Grid Grid { get; set; }
 
+        [JsonProperty(PropertyName = "show_legend")]
+        public bool ShowLegend { get; set; } = true;
+
+        [JsonProperty(PropertyName = "legend_location")]
+        public LegendLocation LegendLocation { get; set; } = LegendLocation.Best;
+
+        [JsonProperty(PropertyName = "frameon")]
+        public bool LegendBorder { get; set; } = true;
+
         /// <summary>
         /// Lines and other plot items. Never add items to this list directly, only set the list itself. For adding/removing
         /// items use AddItem/RemoveItem methods
         /// </summary>
         [JsonProperty(PropertyName = "__items__")]
         public List<PlotItem> PlotItems { get; set; }
-
+        
         #endregion
 
         #region Indexers
@@ -83,4 +92,23 @@ namespace MatplotlibCS
 
         #endregion
     }
+
+    /// <summary>
+    /// Defines where a legend will be located on a chart
+    /// </summary>
+    public enum LegendLocation
+    {
+        Best,
+        UpperRight,
+        UpperLeft,
+        LowerLeft,
+        LowerRight,
+        Right,
+        CenterLeft,
+        CenterRight,
+        LowerCenter,
+        UpperCenter,
+        Center
+    }
 }
+

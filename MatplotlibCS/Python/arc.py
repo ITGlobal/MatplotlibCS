@@ -7,6 +7,7 @@ class Arc:
         self.__dict__ = jsonDict
 
     def plot(self, axes):
+        label = self.name if self.show_legend else ""
         a = patches.Arc((self.x, self.y),
                         self.width,
                         self.height,
@@ -15,6 +16,7 @@ class Arc:
                         theta2=self.theta2,
                         color=self.color["value"],
                         linewidth=self.lineWidth,
-            alpha=self.alpha)
+            alpha=self.alpha,
+                  label=label)
         axes.add_patch(a)
         plot.hold(True)

@@ -31,6 +31,7 @@ namespace MatplotlibCS.PlotItems
             Angle = angle;
             Theta1 = theta1;
             Theta2 = theta2;
+            ShowLegend = false;
         }
 
         /// <summary>

@@ -52,6 +52,8 @@ def api_plot():
         for item in subplot.items:
             if item.is_visible == True:
                 item.plot(axes)
+        if subplot.show_legend:
+            plot.legend(loc=subplot.legend_location, frameon=subplot.frameon)
 
     plot.tight_layout()
 
@@ -77,7 +79,7 @@ def save_figure_to_file(task):
     """
     if "filename" in task and task["filename"] is not None:
         print ("Saving figure to file {0}".format(task["filename"]))
-        plot.savefig(task["filename"], dpi=300)
+        plot.savefig(task["filename"], dpi=task["dpi"])
 
 def set_grid(axes, grid):
     """

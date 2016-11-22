@@ -40,6 +40,7 @@ namespace Examples.Plot2D
                     new Axes(1, "The X axis", "The Y axis")
                     {
                         Title = "Hist 1",
+                        ShowLegend = false,
                         PlotItems =
                         {
                             new Histogram("Sin")

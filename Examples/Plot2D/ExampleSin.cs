@@ -53,6 +53,7 @@ namespace Examples.Plot2D
                     new Axes(1, "The X axis", "The Y axis")
                     {
                         Title = "Sin(x), Sin(2x), VLines, HLines, Annotations",
+                        LegendBorder = false,
                         Grid = new Grid()
                         {
                             MinorAlpha = 0.2,
@@ -80,7 +81,8 @@ namespace Examples.Plot2D
                                 Color = "r",
                                 Markevery = 5,
                                 MarkerSize = 10,
-                                Marker = Marker.Circle
+                                Marker = Marker.Circle,
+                                ShowLegend = false
                             },
 
                             new Text("ant1", "Text annotation", 4.5, 0.76)

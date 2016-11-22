@@ -38,6 +38,7 @@ namespace Examples.Plot2D
                     new Axes(1, "The X axis", "The Y axis")
                     {
                         Title = "Arc, Annotations",
+                        LegendLocation = LegendLocation.LowerLeft,
                         Grid = new Grid()
                         {
                             MinorAlpha = 0.2,
@@ -64,9 +65,9 @@ namespace Examples.Plot2D
                                 Color = Color.Green
                             },
 
-                            new Arc("", 0, 0, 0.5, 0.5, 0, 0, 45) {Color = Color.Blue},
-                            new Arc("", 0, 0, 0.6, 0.6, 0, 0, 90) {Color = Color.Magenta},
-                            new Arc("", 0, 0, 0.7, 0.7, 0, 0, 135) {Color = Color.Green},
+                            new Arc("45 arc", 0, 0, 0.5, 0.5, 0, 0, 45) {Color = Color.Blue},
+                            new Arc("90 arc", 0, 0, 0.6, 0.6, 0, 0, 90) {Color = Color.Magenta},
+                            new Arc("135 arc", 0, 0, 0.7, 0.7, 0, 0, 135) {Color = Color.Green},
 
                             new Text("ant1","45", 0.1, 0.04),
                             new Annotation("ant2","90", 0.2, 0.6, 0.11, 0.26),

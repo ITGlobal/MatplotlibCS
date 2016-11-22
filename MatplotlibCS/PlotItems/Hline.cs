@@ -26,10 +26,12 @@ namespace MatplotlibCS.PlotItems
             Y = y;
             XMin = xmin;
             XMax = xmax;
+            ShowLegend = false;
         }
 
         public Hline(string name, double y, double xmin, double xmax) : this(name, new[] { y }, xmin, xmax)
         {
+            ShowLegend = false;
         }
     }
 }

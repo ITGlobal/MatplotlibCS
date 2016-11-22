@@ -27,6 +27,12 @@ namespace MatplotlibCS.PlotItems
         [JsonProperty(PropertyName = "is_visible")]
         public bool IsVisible { get; set; } = true;
 
+        /// <summary>
+        /// Whether to show this item in legend
+        /// </summary>
+        [JsonProperty(PropertyName = "show_legend")]
+        public bool ShowLegend { get; set; } = true;
+
         #endregion
 
         #region .ctor
