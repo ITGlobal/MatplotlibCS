@@ -21,6 +21,12 @@ namespace MatplotlibCS
         [JsonConverter(typeof(StringEnumConverter))]
         public GridWhich Which { get; set; } = GridWhich.Both;
 
+        [JsonProperty(PropertyName = "x_lim")]
+        public double[] XLim { get; set; }
+
+        [JsonProperty(PropertyName = "y_lim")]
+        public double[] YLim { get; set; }
+
         [JsonProperty(PropertyName = "minor_alpha")]
         public double MinorAlpha { get; set; } = 0.3;
 
