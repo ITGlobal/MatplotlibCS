@@ -121,8 +121,8 @@ def set_titles(task):
     :return:
     """
     plot.title(u"{0}".format(task.title))
-    plot.ylabel(task.xtitle)
-    plot.xlabel(task.ytitle)
+    plot.xlabel(task.xtitle)
+    plot.ylabel(task.ytitle)
 
 # entry point
 if __name__ == "__main__":
