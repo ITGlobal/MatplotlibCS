@@ -26,6 +26,7 @@ class Annotation:
                       xytext=(self.text_x, self.text_y),
                       textcoords='data',
                       color = self.color["value"],
+                      size = self.fontSize,
                       arrowprops=dict(
                           linewidth=self.lineWidth,
                           color = self.color["value"],
