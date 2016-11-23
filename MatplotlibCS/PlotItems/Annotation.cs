@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -42,5 +43,24 @@ namespace MatplotlibCS.PlotItems
 
         [JsonProperty(PropertyName = "color")]        
         public Color Color { get; set; } = Color.Black;
+
+        [JsonProperty(PropertyName = "arrow_style")]
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ArrowStyle ArrowStyle { get; set; } = ArrowStyle.End;
+
+        [JsonProperty(PropertyName = "lineWidth")]
+        public float LineWidth { get; set; } = 1;
+    }
+
+    public enum ArrowStyle
+    {
+        [EnumMember(Value = "<-")]
+        Begin,
+
+        [EnumMember(Value = "->")]
+        End,
+
+        [EnumMember(Value = "<->")]
+        Both
     }
 }

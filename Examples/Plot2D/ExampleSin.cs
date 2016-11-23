@@ -92,7 +92,9 @@ namespace Examples.Plot2D
 
                             new Annotation("ant2","Arrow text annotation", 0.5, -0.7, 3, 0)
                             {
-                                Color = "#00ff88"
+                                Color = "#44ff88",
+                                ArrowStyle = ArrowStyle.Both,
+                                LineWidth = 3,
                             },
 
                             new Vline("vert line", 3.0, -1, 1),

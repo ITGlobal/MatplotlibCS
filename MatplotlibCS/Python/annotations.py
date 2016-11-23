@@ -27,8 +27,9 @@ class Annotation:
                       textcoords='data',
                       color = self.color["value"],
                       arrowprops=dict(
+                          linewidth=self.lineWidth,
                           color = self.color["value"],
-                          arrowstyle="->",
+                          arrowstyle=self.arrow_style,
                           connectionstyle='arc3,rad=0',
                       )
                       )
