@@ -100,18 +100,30 @@ def set_grid(axes, grid):
 
     if grid.x_major_ticks is not None:
         major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])
+        if len(grid.x_major_ticks) > 3:
+            for i in range(3, len(grid.x_major_ticks)):
+                major_ticks = np.append(major_ticks, [grid.x_major_ticks[i]])
         axes.set_xticks(major_ticks)
 
     if grid.x_minor_ticks is not None:
         minor_ticks = np.arange(grid.x_minor_ticks[0], grid.x_minor_ticks[1]+grid.x_minor_ticks[2], grid.x_minor_ticks[2])
+        if len(grid.x_minor_ticks) > 3:
+            for i in range(3, len(grid.x_minor_ticks)):
+                minor_ticks = np.append(minor_ticks, [grid.x_minor_ticks[i]])
         axes.axes.set_xticks(minor_ticks, minor=True)
 
     if grid.y_major_ticks is not None:
         major_ticks = np.arange(grid.y_major_ticks[0], grid.y_major_ticks[1]+grid.y_major_ticks[2], grid.y_major_ticks[2])
+        if len(grid.x_major_ticks) > 3:
+            for i in range(3, len(grid.y_major_ticks)):
+                major_ticks = np.append(major_ticks, [grid.y_major_ticks[i]])
         axes.set_yticks(major_ticks)
 
     if grid.y_minor_ticks is not None:
         minor_ticks = np.arange(grid.y_minor_ticks[0], grid.y_minor_ticks[1]+grid.y_minor_ticks[2], grid.y_minor_ticks[2])
+        if len(grid.x_major_ticks) > 3:
+            for i in range(3, len(grid.y_minor_ticks)):
+                major_ticks = np.append(major_ticks, [grid.y_minor_ticks[i]])
         axes.set_yticks(minor_ticks, minor=True)
 
 
