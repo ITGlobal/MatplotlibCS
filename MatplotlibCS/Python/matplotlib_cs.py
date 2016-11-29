@@ -11,6 +11,8 @@ from flask import Flask, url_for, request, json, Response, abort, jsonify
 
 # a trick to enable text labels in cyrillic
 from task import Task
+import datetime
+from matplotlib import dates
 
 rc('font', **{'sans-serif': 'Arial','family': 'sans-serif'})
 
@@ -98,7 +100,19 @@ def set_grid(axes, grid):
     if grid.y_lim is not None:
         axes.set_ylim(grid.y_lim[0], grid.y_lim[1])
 
-    if grid.x_major_ticks is not None:
+    if grid.x_time_ticks is not None:
+        timeTicks = []
+        for stringTick in grid.x_time_ticks:
+            timeTick = datetime.datetime.strptime(stringTick[0:19] + stringTick[27:30] + stringTick[31:33], '%Y-%m-%dT%H:%M:%S%z')
+            timeTicks.append(dates.date2num(timeTick))
+
+        axes.set_xticks(timeTicks)
+        hfmt = dates.DateFormatter('%m/%d %H:%M')
+        #axes.xaxis.set_major_locator(dates.MinuteLocator())
+        axes.xaxis.set_major_formatter(hfmt)
+
+
+    elif grid.x_major_ticks is not None:
         major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])
         if len(grid.x_major_ticks) > 3:
             for i in range(3, len(grid.x_major_ticks)):
@@ -114,14 +128,14 @@ def set_grid(axes, grid):
 
     if grid.y_major_ticks is not None:
         major_ticks = np.arange(grid.y_major_ticks[0], grid.y_major_ticks[1]+grid.y_major_ticks[2], grid.y_major_ticks[2])
-        if len(grid.x_major_ticks) > 3:
+        if len(grid.y_major_ticks) > 3:
             for i in range(3, len(grid.y_major_ticks)):
                 major_ticks = np.append(major_ticks, [grid.y_major_ticks[i]])
         axes.set_yticks(major_ticks)
 
     if grid.y_minor_ticks is not None:
         minor_ticks = np.arange(grid.y_minor_ticks[0], grid.y_minor_ticks[1]+grid.y_minor_ticks[2], grid.y_minor_ticks[2])
-        if len(grid.x_major_ticks) > 3:
+        if len(grid.y_minor_ticks) > 3:
             for i in range(3, len(grid.y_minor_ticks)):
                 major_ticks = np.append(major_ticks, [grid.y_minor_ticks[i]])
         axes.set_yticks(minor_ticks, minor=True)

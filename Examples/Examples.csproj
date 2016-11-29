@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Plot2D\ExampleArс.cs" />
     <Compile Include="Plot2D\ExampleHistogram.cs" />
+    <Compile Include="Plot2D\ExampleTimeAxis.cs" />
     <Compile Include="Plot2D\ExampleVisibility.cs" />
     <Compile Include="Plot2D\ExampleSin.cs" />
     <Compile Include="Program.cs" />

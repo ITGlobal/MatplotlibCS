@@ -48,19 +48,19 @@ namespace Examples.Plot2D
                         {
                             new Line2D("45")
                             {
-                                X = new List<double>() {-1, 1},
+                                X = new List<object>() {-1, 1},
                                 Y = new List<double>() {-1, 1},
                                 Color = Color.Blue
                             },
                             new Line2D("90")
                             {
-                                X = new List<double>() {0, 0},
+                                X = new List<object>() {0, 0},
                                 Y = new List<double>() {-1, 1},
                                 Color = Color.Magenta
                             },
                             new Line2D("145")
                             {
-                                X = new List<double>() {-1, 1},
+                                X = new List<object>() {-1, 1},
                                 Y = new List<double>() {1, -1},
                                 Color = Color.Green
                             },

@@ -8,7 +8,7 @@ using MatplotlibCS.PlotItems;
 
 namespace Examples.Plot2D
 {
-    class ExampleSin
+    class ExampleTimeAxis
     {
         /// <summary>
         /// Chart of sin
@@ -43,22 +43,28 @@ namespace Examples.Plot2D
             // init engine with right paths 
             var matplotlibCs = new MatplotlibCS.MatplotlibCS(pythonExePath, dasPlotPyPath);
 
+            var timeTicks = new List<DateTime>();
+            timeTicks.Add(DateTime.Now);
+            var timeStep = new TimeSpan(0, 1, 0, 0);
+            for (int i = 1; i < N; i++)
+                timeTicks.Add(timeTicks[i - 1] + timeStep);
+            
             var figure = new Figure(1, 1)
             {
-                FileName = "ExampleSin.png",
+                FileName = "ExampleTimeAxis.png",
                 OnlySaveImage = true,
                 DPI = 150,
                 Subplots =
                 {
-                    new Axes(1, "The X axis", "The Y axis")
+                    new Axes(1, "Time", "Value")
                     {
-                        Title = "Sin(x), Sin(2x), VLines, HLines, Annotations",
+                        Title = "Time Axis Example",
                         LegendBorder = false,
                         Grid = new Grid()
                         {
                             MinorAlpha = 0.2,
                             MajorAlpha = 1.0,
-                            XMajorTicks = new[] {0.0, 7.6, 0.5, 1.75},
+                            XTimeTicks = timeTicks.ToArray(),
                             YMajorTicks = new[] {-1, 2.5, 0.25, 0.125},
                             XMinorTicks = new[] {0.0, 7.25, 0.25, 1.125},
                             YMinorTicks = new[] {-1, 2.5, 0.125, 1.025}
@@ -71,34 +77,6 @@ namespace Examples.Plot2D
                                 Y = Y1.ToList(),
                                 LineStyle = LineStyle.Dashed
                             },
-
-                            new Line2D("Sin 2x")
-                            {
-                                X = X.Cast<object>().ToList(),
-                                Y = Y2.ToList(),
-                                LineStyle = LineStyle.Solid,
-                                LineWidth = 0.5f,
-                                Color = "r",
-                                Markevery = 5,
-                                MarkerSize = 10,
-                                Marker = Marker.Circle,
-                                ShowLegend = false
-                            },
-
-                            new Text("ant1", "Text annotation", 4.5, 0.76)
-                            {
-                                FontSize = 17
-                            },
-
-                            new Annotation("ant2","Arrow text annotation", 0.5, -0.7, 3, 0)
-                            {
-                                Color = "#44ff88",
-                                ArrowStyle = ArrowStyle.Both,
-                                LineWidth = 3,
-                            },
-
-                            new Vline("vert line", 3.0, -1, 1),
-                            new Hline("hrzt line", new[] {0.1, 0.25, 0.375}, 0, 5) {LineStyle = LineStyle.Dashed, Color = Color.Magenta}
                         }
                     }
 

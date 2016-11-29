@@ -19,7 +19,7 @@ namespace MatplotlibCS.PlotItems
         /// 
         public Line2D(string name) : base(name)
         {
-            X = new List<double>();
+            X = new List<object>();
             Y = new List<double>();
         }
 
@@ -75,7 +75,7 @@ namespace MatplotlibCS.PlotItems
         /// Данные для графика, аргумент
         /// </summary>
         [JsonProperty(PropertyName = "x")]
-        public List<double> X { get; set; }
+        public List<object> X { get; set; }
 
         /// <summary>
         /// Данные для графика, значение

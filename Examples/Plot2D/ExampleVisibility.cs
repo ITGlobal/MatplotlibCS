@@ -32,14 +32,14 @@ namespace Examples.Plot2D
                         {
                             new Line2D("Line 1")
                             {
-                                X = new List<double>() {-1, 1},
+                                X = new List<object>() {-1, 1},
                                 Y = new List<double>() {-1, 1},
                                 LineStyle = LineStyle.Dashed,
                                 Color = Color.Blue
                             },
                             new Line2D("Line 2")
                             {
-                                X = new List<double>() {-1, 1},
+                                X = new List<object>() {-1, 1},
                                 Y = new List<double>() {-2, 2},
                                 LineStyle = LineStyle.Solid,
                                 Color = Color.Red,

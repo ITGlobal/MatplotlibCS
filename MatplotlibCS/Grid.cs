@@ -47,6 +47,9 @@ namespace MatplotlibCS
 
         [JsonProperty(PropertyName = "y_minor_ticks")]
         public double[] YMinorTicks { get; set; }
+
+        [JsonProperty(PropertyName = "x_time_ticks")]
+        public DateTime[] XTimeTicks { get; set; }
     }
 
     
