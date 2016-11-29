@@ -6,14 +6,15 @@ import matplotlib.patches as patches
 import numpy as np
 from matplotlib import rc
 from flask import Flask, url_for, request, json, Response, abort, jsonify
+from task import Task
+import datetime
+import matplotlib.dates as mdates
+import matplotlib.cbook as cbook
+
 # Script builds a matplotlib figure based on information, passed to it through json file.
 # Path to the JSON must be passed in first command line argument.
 
 # a trick to enable text labels in cyrillic
-from task import Task
-import datetime
-from matplotlib import dates
-
 rc('font', **{'sans-serif': 'Arial','family': 'sans-serif'})
 
 app = Flask(__name__)
@@ -50,12 +51,13 @@ def api_plot():
         axes = subplots[subplot.index]
         plot.sca(axes)
         set_titles(subplot)
-        set_grid(axes, subplot.grid)
         for item in subplot.items:
             if item.is_visible == True:
                 item.plot(axes)
         if subplot.show_legend:
             plot.legend(loc=subplot.legend_location, frameon=subplot.frameon)
+
+    set_grid(fig, axes, subplot.grid)
 
     plot.tight_layout()
 
@@ -83,7 +85,7 @@ def save_figure_to_file(task):
         print ("Saving figure to file {0}".format(task["filename"]))
         plot.savefig(task["filename"], dpi=task["dpi"])
 
-def set_grid(axes, grid):
+def set_grid(fig, axes, grid):
     """
     Setup axes grid
     :param axes:
@@ -104,13 +106,12 @@ def set_grid(axes, grid):
         timeTicks = []
         for stringTick in grid.x_time_ticks:
             timeTick = datetime.datetime.strptime(stringTick[0:19] + stringTick[27:30] + stringTick[31:33], '%Y-%m-%dT%H:%M:%S%z')
-            timeTicks.append(dates.date2num(timeTick))
+            timeTicks.append(timeTick)
 
+        formatter = mdates.DateFormatter(grid.time_ticks_format['value'])
+        axes.xaxis.set_major_formatter(formatter)
         axes.set_xticks(timeTicks)
-        hfmt = dates.DateFormatter('%m/%d %H:%M')
-        #axes.xaxis.set_major_locator(dates.MinuteLocator())
-        axes.xaxis.set_major_formatter(hfmt)
-
+        fig.autofmt_xdate()
 
     elif grid.x_major_ticks is not None:
         major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])
@@ -119,12 +120,12 @@ def set_grid(axes, grid):
                 major_ticks = np.append(major_ticks, [grid.x_major_ticks[i]])
         axes.set_xticks(major_ticks)
 
-    if grid.x_minor_ticks is not None:
-        minor_ticks = np.arange(grid.x_minor_ticks[0], grid.x_minor_ticks[1]+grid.x_minor_ticks[2], grid.x_minor_ticks[2])
-        if len(grid.x_minor_ticks) > 3:
-            for i in range(3, len(grid.x_minor_ticks)):
-                minor_ticks = np.append(minor_ticks, [grid.x_minor_ticks[i]])
-        axes.axes.set_xticks(minor_ticks, minor=True)
+        if grid.x_minor_ticks is not None:
+            minor_ticks = np.arange(grid.x_minor_ticks[0], grid.x_minor_ticks[1]+grid.x_minor_ticks[2], grid.x_minor_ticks[2])
+            if len(grid.x_minor_ticks) > 3:
+                for i in range(3, len(grid.x_minor_ticks)):
+                    minor_ticks = np.append(minor_ticks, [grid.x_minor_ticks[i]])
+            axes.axes.set_xticks(minor_ticks, minor=True)
 
     if grid.y_major_ticks is not None:
         major_ticks = np.arange(grid.y_major_ticks[0], grid.y_major_ticks[1]+grid.y_major_ticks[2], grid.y_major_ticks[2])

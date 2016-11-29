@@ -1,10 +1,13 @@
 import matplotlib.pyplot as plot
 import matplotlib.patches as patches
 
+from line_2d import Line2D
 
-class Arc:
+
+class Arc(Line2D):
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
+        self.check_if_x_is_time()
 
     def plot(self, axes):
         label = self.name if self.show_legend else ""

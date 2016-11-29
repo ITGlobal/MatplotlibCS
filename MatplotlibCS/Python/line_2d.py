@@ -1,21 +1,21 @@
 import matplotlib.pyplot as plot
-
+from datetime import datetime
+import matplotlib.dates as mdates
+from helpers import if_string_convert_to_datetime
 
 class Line2D:
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
+        self.check_if_x_is_time()
+
+    def check_if_x_is_time(self):
+        if isinstance(self.x, str) or (isinstance(self.x, list) and isinstance(self.x[0], str)):
+            self.x = if_string_convert_to_datetime(self.x)
 
     def plot(self, axes):
-        line = self.__dict__
-        # c = 'r' if "color" not in line else line["color"]
-        # m = '' if "marker" not in line else line["marker"]
-        # lw = 1 if "lineWidth" not in line else line["lineWidth"]
-        # ms = 1 if "markerSize" not in line else line["markerSize"]
-        # ls = '-' if "lineStyle" not in line else line["lineStyle"]
-        # markevery = 1 if "markevery" not in line else line["markevery"]
         label = self.name if self.show_legend else ""
-        plot.plot(line["x"],
-                  line["y"],
+        plot.plot(self.x,
+                  self.y,
                   color=self.color["value"],
                   marker=self.marker,
                   lw=self.lineWidth,

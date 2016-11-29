@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plot
 
+from line_2d import Line2D
 
-class Vline:
+
+class Vline(Line2D):
     def __init__(self, jsonDict):
         self.__dict__ = jsonDict
+        self.check_if_x_is_time()
 
     def plot(self, axes):
         label = self.name if self.show_legend else ""

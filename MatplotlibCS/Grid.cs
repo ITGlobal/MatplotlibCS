@@ -50,6 +50,9 @@ namespace MatplotlibCS
 
         [JsonProperty(PropertyName = "x_time_ticks")]
         public DateTime[] XTimeTicks { get; set; }
+
+        [JsonProperty(PropertyName = "time_ticks_format")]
+        public TimeTickFormat TimeTickFormat { get; set; } = TimeTickFormat.DateAndTime;
     }
 
     

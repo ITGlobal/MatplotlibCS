@@ -17,7 +17,7 @@ namespace Examples.Plot2D
         {
             #region create test data
 
-            const int N = 100;
+            const int N = 50;
             var X = new double[N];
             var Y1 = new double[N];
             var Y2 = new double[N];
@@ -45,7 +45,7 @@ namespace Examples.Plot2D
 
             var timeTicks = new List<DateTime>();
             timeTicks.Add(DateTime.Now);
-            var timeStep = new TimeSpan(0, 1, 0, 0);
+            var timeStep = new TimeSpan(0, 4, 0, 0);
             for (int i = 1; i < N; i++)
                 timeTicks.Add(timeTicks[i - 1] + timeStep);
             
@@ -65,17 +65,20 @@ namespace Examples.Plot2D
                             MinorAlpha = 0.2,
                             MajorAlpha = 1.0,
                             XTimeTicks = timeTicks.ToArray(),
+                            TimeTickFormat = TimeTickFormat.HHMMSS,
                             YMajorTicks = new[] {-1, 2.5, 0.25, 0.125},
                             XMinorTicks = new[] {0.0, 7.25, 0.25, 1.125},
                             YMinorTicks = new[] {-1, 2.5, 0.125, 1.025}
                         },
                         PlotItems =
                         {
-                            new Line2D("Sin")
+                            new Line2D("Data")
                             {
-                                X = X.Cast<object>().ToList(),
+                                X = timeTicks.Cast<object>().ToList(),
                                 Y = Y1.ToList(),
-                                LineStyle = LineStyle.Dashed
+                                LineStyle = LineStyle.Dashed,
+                                Marker = Marker.Circle,
+                                MarkerSize = 5
                             },
                         }
                     }

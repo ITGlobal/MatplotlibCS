@@ -158,6 +158,30 @@ namespace MatplotlibCS.PlotItems
         public static Color White = new Color("w");
 
         public static Color Magenta = new Color("m");
+    }
+
+    public class TimeTickFormat
+    {
+        [JsonProperty(PropertyName = "value")]
+        public string Value { get; private set; }
+
+        public TimeTickFormat(string formatString)
+        {
+            Value = formatString;
+        }
+
+        public static implicit operator TimeTickFormat(string formatString)
+        {
+            return new TimeTickFormat(formatString);
+        }
+
+        public static TimeTickFormat HHMMSS = new TimeTickFormat("%H:%M:%S");
+
+        public static TimeTickFormat HHMM = new TimeTickFormat("%H:%M");
+
+        public static TimeTickFormat DateOnly = new TimeTickFormat("%Y-%m-%d");
+
+        public static TimeTickFormat DateAndTime = new TimeTickFormat("%Y-%m-%d %H:%M:%S");
 
     }
 
