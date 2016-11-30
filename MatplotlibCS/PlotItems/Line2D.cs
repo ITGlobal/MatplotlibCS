@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -10,6 +13,15 @@ namespace MatplotlibCS.PlotItems
     [JsonObject(Title = "line")]
     public class Line2D : PlotItem
     {
+        #region Fields
+
+        /// <summary>
+        /// Internal X values string representation
+        /// </summary>
+        private List<object> _x = new List<object>();
+
+        #endregion
+
         #region ctor
 
         /// <summary>
@@ -75,7 +87,36 @@ namespace MatplotlibCS.PlotItems
         /// Данные для графика, аргумент
         /// </summary>
         [JsonProperty(PropertyName = "x")]
-        public List<object> X { get; set; }
+        public List<object> X
+        {
+            get
+            {
+                return _x.Cast<object>().ToList();
+            }
+            set
+            {
+                if (value == null || value.Count == 0)
+                {
+                    _x.Clear();
+                    return;
+                }
+
+                var firstItem = value[0];
+
+                if (firstItem is DateTime)
+                {
+                    _x.Clear();
+                    foreach (var item in value)
+                        _x.Add(((DateTime) item).ToString("yyyy-MM-ddTHH:mm:ss,ffffff"));
+                }
+                else if (firstItem is double || firstItem is int || firstItem is long || firstItem is float)
+                {
+                    _x.Clear();
+                    foreach (var item in value)
+                        _x.Add(item);
+                }
+            }
+        }
 
         /// <summary>
         /// Данные для графика, значение

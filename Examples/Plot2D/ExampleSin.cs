@@ -97,7 +97,7 @@ namespace Examples.Plot2D
                                 LineWidth = 3,
                             },
 
-                            new Vline("vert line", 3.0, -1, 1),
+                            new Vline("vert line", new object[] {3.0}, -1, 1),
                             new Hline("hrzt line", new[] {0.1, 0.25, 0.375}, 0, 5) {LineStyle = LineStyle.Dashed, Color = Color.Magenta}
                         }
                     }

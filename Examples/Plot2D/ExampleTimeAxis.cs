@@ -17,7 +17,7 @@ namespace Examples.Plot2D
         {
             #region create test data
 
-            const int N = 50;
+            const int N = 10;
             var X = new double[N];
             var Y1 = new double[N];
             var Y2 = new double[N];
@@ -80,6 +80,7 @@ namespace Examples.Plot2D
                                 Marker = Marker.Circle,
                                 MarkerSize = 5
                             },
+                            new Vline("vl", new object[] {DateTime.Now.AddHours(2)},-1,1)
                         }
                     }
 
