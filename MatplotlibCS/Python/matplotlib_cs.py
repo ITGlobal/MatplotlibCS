@@ -58,7 +58,7 @@ def api_plot():
         if subplot.show_legend:
             plot.legend(loc=subplot.legend_location, frameon=subplot.frameon)
 
-    set_grid(fig, axes, subplot.grid)
+        set_grid(fig, axes, subplot.grid)
 
     plot.tight_layout()
 
@@ -104,7 +104,7 @@ def set_grid(fig, axes, grid):
         axes.set_ylim(grid.y_lim[0], grid.y_lim[1])
 
     # if time ticks defined
-    if grid.x_time_ticks is not None:
+    if grid.x_time_ticks is not None and len(grid.x_time_ticks) > 0:
         timeTicks = []
         for stringTick in grid.x_time_ticks:
             timeTick = if_string_convert_to_datetime(stringTick)
@@ -126,14 +126,6 @@ def set_grid(fig, axes, grid):
             axes.xaxis.set_major_formatter(formatter)
             axes.set_xticks(timeTicks)
 
-        labels = axes.get_xticklabels()
-
-        if grid.x_tick_fontsize is not None and grid.x_tick_fontsize!=0:
-            plot.setp(labels, fontsize=grid.x_tick_fontsize)
-
-        if grid.x_tick_rotation is not None and grid.x_tick_rotation!=0:
-            plot.setp(labels, rotation=grid.x_tick_rotation)
-
     # if no time ticks defined
     elif grid.x_major_ticks is not None:
         axes.set_xticks(build_ticks_list(grid.x_major_ticks))
@@ -145,6 +137,15 @@ def set_grid(fig, axes, grid):
 
     if grid.y_minor_ticks is not None:
         axes.set_yticks(build_ticks_list(grid.y_minor_ticks), minor=True)
+
+    # set font and rotation
+    labels = axes.get_xticklabels()
+
+    if grid.x_tick_fontsize is not None and grid.x_tick_fontsize!=0:
+        plot.setp(labels, fontsize=grid.x_tick_fontsize)
+
+    if grid.x_tick_rotation is not None and grid.x_tick_rotation!=0:
+        plot.setp(labels, rotation=grid.x_tick_rotation)
 
 
 def build_ticks_list(lims):
