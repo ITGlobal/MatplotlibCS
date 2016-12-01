@@ -111,7 +111,15 @@ def set_grid(fig, axes, grid):
         formatter = mdates.DateFormatter(grid.time_ticks_format['value'])
         axes.xaxis.set_major_formatter(formatter)
         axes.set_xticks(timeTicks)
-        fig.autofmt_xdate()
+        # fig.autofmt_xdate()
+        labels = axes.get_xticklabels()
+
+        if grid.x_tick_fontsize is not None and grid.x_tick_fontsize!=0:
+            plot.setp(labels, fontsize=grid.x_tick_fontsize)
+
+        if grid.x_tick_rotation is not None and grid.x_tick_rotation!=0:
+            plot.setp(labels, rotation=grid.x_tick_rotation)
+
 
     elif grid.x_major_ticks is not None:
         major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])

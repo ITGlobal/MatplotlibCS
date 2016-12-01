@@ -87,6 +87,12 @@ namespace MatplotlibCS
 
         [JsonProperty(PropertyName = "time_ticks_format")]
         public TimeTickFormat TimeTickFormat { get; set; } = TimeTickFormat.DateAndTime;
+
+        [JsonProperty(PropertyName = "x_tick_fontsize")]
+        public double XTickFontSize { get; set; }
+
+        [JsonProperty(PropertyName = "x_tick_rotation")]
+        public double XTickRotation { get; set; }
     }
 
     
