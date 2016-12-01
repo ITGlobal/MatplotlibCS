@@ -64,7 +64,7 @@ namespace Examples.Plot2D
                         {
                             MinorAlpha = 0.2,
                             MajorAlpha = 1.0,
-                            XTimeTicks = timeTicks.ToArray(),
+                            XTimeTicks = timeTicks.Cast<object>().ToList(),
                             TimeTickFormat = TimeTickFormat.HHMMSS,
                             YMajorTicks = new[] {-1, 2.5, 0.25, 0.125},
                             XMinorTicks = new[] {0.0, 7.25, 0.25, 1.125},

@@ -14,6 +14,15 @@ namespace MatplotlibCS
     /// </summary>
     public class Grid
     {
+        #region Fields
+
+        /// <summary>
+        /// Internal time ticks string representation
+        /// </summary>
+        private List<object> _x = new List<object>();
+
+        #endregion
+
         /// <summary>
         /// Which grids to show on a plot
         /// </summary>
@@ -49,7 +58,32 @@ namespace MatplotlibCS
         public double[] YMinorTicks { get; set; }
 
         [JsonProperty(PropertyName = "x_time_ticks")]
-        public DateTime[] XTimeTicks { get; set; }
+        public List<object> XTimeTicks
+        {
+            get
+            {
+                return _x.ToList();
+            }
+            set
+            {
+                if (value == null || value.Count == 0)
+                {
+                    _x.Clear();
+                    return;
+                }
+
+                var firstItem = value[0];
+
+                if (firstItem is DateTime)
+                {
+                    _x.Clear();
+                    foreach (var item in value)
+                        _x.Add(((DateTime)item).ToString("yyyy-MM-ddTHH:mm:ss,ffffff"));
+                }
+                else 
+                    throw new ArgumentException("XTimeTicks must be set with List<DateTime> only");
+            }
+        }
 
         [JsonProperty(PropertyName = "time_ticks_format")]
         public TimeTickFormat TimeTickFormat { get; set; } = TimeTickFormat.DateAndTime;

@@ -91,7 +91,7 @@ namespace MatplotlibCS.PlotItems
         {
             get
             {
-                return _x.Cast<object>().ToList();
+                return _x.ToList();
             }
             set
             {

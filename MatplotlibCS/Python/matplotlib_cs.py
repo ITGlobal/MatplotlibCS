@@ -9,7 +9,7 @@ from flask import Flask, url_for, request, json, Response, abort, jsonify
 from task import Task
 import datetime
 import matplotlib.dates as mdates
-import matplotlib.cbook as cbook
+from helpers import if_string_convert_to_datetime
 
 # Script builds a matplotlib figure based on information, passed to it through json file.
 # Path to the JSON must be passed in first command line argument.
@@ -105,7 +105,7 @@ def set_grid(fig, axes, grid):
     if grid.x_time_ticks is not None:
         timeTicks = []
         for stringTick in grid.x_time_ticks:
-            timeTick = datetime.datetime.strptime(stringTick[0:19] + stringTick[27:30] + stringTick[31:33], '%Y-%m-%dT%H:%M:%S%z')
+            timeTick = if_string_convert_to_datetime(stringTick)
             timeTicks.append(timeTick)
 
         formatter = mdates.DateFormatter(grid.time_ticks_format['value'])
