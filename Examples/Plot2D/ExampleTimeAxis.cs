@@ -45,10 +45,15 @@ namespace Examples.Plot2D
 
             var timeTicks = new List<DateTime>();
             timeTicks.Add(DateTime.Now);
-            var timeStep = new TimeSpan(0, 4, 0, 0);
-            for (int i = 1; i < N; i++)
-                timeTicks.Add(timeTicks[i - 1] + timeStep);
-            
+
+            var xMajorTicks = new List<double>();
+            xMajorTicks.Add(0);
+            for (var i = 1; i < N; i++)
+            {
+                xMajorTicks.Add(i);
+                timeTicks.Add(timeTicks[i - 1] + new TimeSpan(0, rnd.Next(1, 10), 0, 0));
+            }
+
             var figure = new Figure(1, 1)
             {
                 FileName = "ExampleTimeAxis.png",
@@ -66,6 +71,7 @@ namespace Examples.Plot2D
                             MajorAlpha = 1.0,
                             XTimeTicks = timeTicks.Cast<object>().ToList(),
                             TimeTickFormat = TimeTickFormat.HHMMSS,
+                            RegularTimeAxis = true,
                             YMajorTicks = new[] {-1, 2.5, 0.25, 0.125},
                             XMinorTicks = new[] {0.0, 7.25, 0.25, 1.125},
                             YMinorTicks = new[] {-1, 2.5, 0.125, 1.025},
@@ -76,13 +82,15 @@ namespace Examples.Plot2D
                         {
                             new Line2D("Data")
                             {
-                                X = timeTicks.Cast<object>().ToList(),
+                                //X = timeTicks.Cast<object>().ToList(),
+                                X=xMajorTicks.Cast<object>().ToList(),
                                 Y = Y1.ToList(),
                                 LineStyle = LineStyle.Dashed,
                                 Marker = Marker.Circle,
                                 MarkerSize = 5
                             },
-                            new Vline("vl", new object[] {DateTime.Now.AddHours(2)},-1,1)
+                            //new Vline("vl", new object[] {DateTime.Now.AddHours(10)},-1,1),
+                            new Vline("vl", new object[] {5},-1,1)
                         }
                     }
 

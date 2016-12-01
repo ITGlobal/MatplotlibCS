@@ -8,7 +8,7 @@ namespace MatplotlibCS
 {
     /// <summary></summary>
     [JsonObject(Title = "axes")]
-    public class Axes
+    public class Axes : IHealthCheck
     {
         #region .ctor
 
@@ -91,6 +91,16 @@ namespace MatplotlibCS
         }
 
         #endregion
+
+        public void HealthCheck()
+        {
+            Grid.HealthCheck();
+
+            foreach (var plotItem in PlotItems)
+            {
+                plotItem.HealthCheck();
+            }
+        }
     }
 
     /// <summary>

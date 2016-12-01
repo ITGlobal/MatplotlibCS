@@ -10,6 +10,7 @@ from task import Task
 import datetime
 import matplotlib.dates as mdates
 from helpers import if_string_convert_to_datetime
+import matplotlib.ticker as ticker
 
 # Script builds a matplotlib figure based on information, passed to it through json file.
 # Path to the JSON must be passed in first command line argument.
@@ -102,16 +103,29 @@ def set_grid(fig, axes, grid):
     if grid.y_lim is not None:
         axes.set_ylim(grid.y_lim[0], grid.y_lim[1])
 
+    # if time ticks defined
     if grid.x_time_ticks is not None:
         timeTicks = []
         for stringTick in grid.x_time_ticks:
             timeTick = if_string_convert_to_datetime(stringTick)
             timeTicks.append(timeTick)
 
-        formatter = mdates.DateFormatter(grid.time_ticks_format['value'])
-        axes.xaxis.set_major_formatter(formatter)
-        axes.set_xticks(timeTicks)
-        # fig.autofmt_xdate()
+        # distance between nodes will be equal
+        if grid.regular_time_axis:
+            n = len(grid.x_time_ticks)
+
+            def format_date(x, pos=None):
+                thisind = np.clip(int(x + 0.5), 0, n - 1)
+                return timeTicks[thisind].strftime(grid.time_ticks_format['value'])
+
+            axes.xaxis.set_major_formatter(ticker.FuncFormatter(format_date))
+
+        # else distance between time nodes will be as is
+        else:
+            formatter = mdates.DateFormatter(grid.time_ticks_format['value'])
+            axes.xaxis.set_major_formatter(formatter)
+            axes.set_xticks(timeTicks)
+
         labels = axes.get_xticklabels()
 
         if grid.x_tick_fontsize is not None and grid.x_tick_fontsize!=0:
@@ -120,35 +134,31 @@ def set_grid(fig, axes, grid):
         if grid.x_tick_rotation is not None and grid.x_tick_rotation!=0:
             plot.setp(labels, rotation=grid.x_tick_rotation)
 
-
+    # if no time ticks defined
     elif grid.x_major_ticks is not None:
-        major_ticks = np.arange(grid.x_major_ticks[0], grid.x_major_ticks[1]+grid.x_major_ticks[2], grid.x_major_ticks[2])
-        if len(grid.x_major_ticks) > 3:
-            for i in range(3, len(grid.x_major_ticks)):
-                major_ticks = np.append(major_ticks, [grid.x_major_ticks[i]])
-        axes.set_xticks(major_ticks)
-
+        axes.set_xticks(build_ticks_list(grid.x_major_ticks))
         if grid.x_minor_ticks is not None:
-            minor_ticks = np.arange(grid.x_minor_ticks[0], grid.x_minor_ticks[1]+grid.x_minor_ticks[2], grid.x_minor_ticks[2])
-            if len(grid.x_minor_ticks) > 3:
-                for i in range(3, len(grid.x_minor_ticks)):
-                    minor_ticks = np.append(minor_ticks, [grid.x_minor_ticks[i]])
-            axes.axes.set_xticks(minor_ticks, minor=True)
+            axes.set_xticks(build_ticks_list(grid.x_minor_ticks), minor=True)
 
     if grid.y_major_ticks is not None:
-        major_ticks = np.arange(grid.y_major_ticks[0], grid.y_major_ticks[1]+grid.y_major_ticks[2], grid.y_major_ticks[2])
-        if len(grid.y_major_ticks) > 3:
-            for i in range(3, len(grid.y_major_ticks)):
-                major_ticks = np.append(major_ticks, [grid.y_major_ticks[i]])
-        axes.set_yticks(major_ticks)
+        axes.set_yticks(build_ticks_list(grid.y_major_ticks))
 
     if grid.y_minor_ticks is not None:
-        minor_ticks = np.arange(grid.y_minor_ticks[0], grid.y_minor_ticks[1]+grid.y_minor_ticks[2], grid.y_minor_ticks[2])
-        if len(grid.y_minor_ticks) > 3:
-            for i in range(3, len(grid.y_minor_ticks)):
-                major_ticks = np.append(major_ticks, [grid.y_minor_ticks[i]])
-        axes.set_yticks(minor_ticks, minor=True)
+        axes.set_yticks(build_ticks_list(grid.y_minor_ticks), minor=True)
 
+
+def build_ticks_list(lims):
+    '''
+    First two values in lims are the minimum and the maximum values, while third value is a step.
+    Values starting from 4 are additional values which will be added to the grid
+    :param lims:
+    :return:
+    '''
+    ticks = np.arange(lims[0], lims[1] + lims[2], lims[2])
+    if len(lims) > 3:
+        for i in range(3, len(lims)):
+            ticks = np.append(ticks, [lims[i]])
+    return ticks
 
 def set_titles(task):
     """

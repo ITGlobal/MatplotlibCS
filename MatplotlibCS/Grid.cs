@@ -12,7 +12,7 @@ namespace MatplotlibCS
     /// <summary>
     /// Class describes a grid settings on a plot
     /// </summary>
-    public class Grid
+    public class Grid : IHealthCheck
     {
         #region Fields
 
@@ -88,11 +88,20 @@ namespace MatplotlibCS
         [JsonProperty(PropertyName = "time_ticks_format")]
         public TimeTickFormat TimeTickFormat { get; set; } = TimeTickFormat.DateAndTime;
 
+        [JsonProperty(PropertyName = "regular_time_axis")]
+        public bool RegularTimeAxis { get; set; } = false;
+
         [JsonProperty(PropertyName = "x_tick_fontsize")]
         public double XTickFontSize { get; set; }
 
         [JsonProperty(PropertyName = "x_tick_rotation")]
         public double XTickRotation { get; set; }
+
+        public void HealthCheck()
+        {
+            //if(XTimeTicks!=null && XTimeTicks.Count>0 && XMajorTicks!=null && XMajorTicks.Length>0 && XMajorTicks.Length!= XTimeTicks.Count)
+            //    throw new HealthCheckException("Grid.XTimeTicks and Grid.XMajorTicks must be of the same leangth");
+        }
     }
 
     

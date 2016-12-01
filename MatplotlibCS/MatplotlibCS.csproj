@@ -56,6 +56,7 @@
     <Compile Include="PlotItems\Enums.cs" />
     <Compile Include="PlotItems\Histogram.cs" />
     <Compile Include="PlotItems\Hline.cs" />
+    <Compile Include="PlotItems\IHealthCheck.cs" />
     <Compile Include="PlotItems\Point2D.cs" />
     <Compile Include="PlotItems\Line2D.cs" />
     <Compile Include="PlotItems\PlotItem.cs" />

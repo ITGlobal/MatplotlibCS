@@ -81,6 +81,8 @@ namespace MatplotlibCS
         /// <param name="task">Описание задачи</param>
         public async Task BuildFigure(Figure task)
         {
+            task.HealthCheck();
+
             try
             {
                 LaunchPythonWebService();

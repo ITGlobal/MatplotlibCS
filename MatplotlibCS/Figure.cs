@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using MatplotlibCS.PlotItems;
 using Newtonsoft.Json;
 
 namespace MatplotlibCS
@@ -8,7 +9,7 @@ namespace MatplotlibCS
     /// Class desribing a figure to be build
     /// </summary>
     [JsonObject(Title = "figure")]
-    public class Figure
+    public class Figure : IHealthCheck
     {
         #region ctor
 
@@ -77,5 +78,13 @@ namespace MatplotlibCS
         public int Height { get; set; } = 1080;
         
         #endregion
+
+        public void HealthCheck()
+        {
+            foreach (var subplot in Subplots)
+            {
+                subplot.HealthCheck();
+            }
+        }
     }
 }

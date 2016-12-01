@@ -5,7 +5,7 @@ namespace MatplotlibCS.PlotItems
     /// <summary>
     /// Базовый класс для элементов, которые отрисовываются на графике
     /// </summary>
-    public abstract class PlotItem
+    public abstract class PlotItem : IHealthCheck
     {
         #region Properties
 
@@ -47,5 +47,9 @@ namespace MatplotlibCS.PlotItems
         }
 
         #endregion
+
+        public virtual void HealthCheck()
+        {
+        }
     }
 }
