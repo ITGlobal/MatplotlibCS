@@ -19,7 +19,7 @@ namespace MatplotlibCS
         /// <summary>
         /// Internal time ticks string representation
         /// </summary>
-        private List<object> _x = new List<object>();
+        private List<object> _x;
 
         #endregion
 
@@ -62,7 +62,7 @@ namespace MatplotlibCS
         {
             get
             {
-                return _x.ToList();
+                return _x;
             }
             set
             {

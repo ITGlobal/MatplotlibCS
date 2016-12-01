@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plot
+from matplotlib.ticker import FormatStrFormatter
 
 
 class Histogram:
@@ -7,7 +8,7 @@ class Histogram:
 
     def plot(self, axes):
         label = self.name if self.show_legend else ""
-        plot.hist(
+        counts, bins, patches = plot.hist(
             self.y,
             self.bins,
             color=self.color["value"],
@@ -19,3 +20,6 @@ class Histogram:
             alpha=self.alpha,
                   label=label)
         plot.hold(True)
+        axes.set_xticks(bins)
+        # axes.xaxis.set_major_formatter(FormatStrFormatter('%f'))
+
