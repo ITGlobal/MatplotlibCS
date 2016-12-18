@@ -25,7 +25,7 @@ namespace MatplotlibCS.PlotItems
         /// Optional fields which can be used to filter plot items. For example, one can precreate all plot items and then save several images with 
         /// different visible items, be setting IsVisible property
         /// </summary>
-        public string Tags { get; set; }
+        public string Tags { get; set; } = "";
 
         /// <summary>
         /// If false, item will not be drawn
