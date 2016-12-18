@@ -14,10 +14,15 @@ class Line2D:
 
     def plot(self, axes):
         label = self.name if self.show_legend else ""
+        markeredgecolor = self.color["value"] if self.markeredgecolor is None else self.markeredgecolor["value"]
+        markerfacecolor = self.color["value"] if self.markerfacecolor is None else self.markerfacecolor["value"]
         plot.plot(self.x,
                   self.y,
                   color=self.color["value"],
                   marker=self.marker,
+                  markeredgecolor=markeredgecolor,
+                  markeredgewidth=self.markeredgewidth,
+                  markerfacecolor=markerfacecolor,
                   lw=self.lineWidth,
                   ms=self.markerSize,
                   ls=self.lineStyle,
