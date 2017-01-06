@@ -44,6 +44,12 @@ namespace MatplotlibCS.PlotItems
         [JsonProperty(PropertyName = "color")]        
         public Color Color { get; set; } = Color.Black;
 
+        /// <summary>
+        /// Color transparency
+        /// </summary>
+        [JsonProperty(PropertyName = "alpha")]
+        public double Alpha { get; set; } = 1;
+
         [JsonProperty(PropertyName = "arrow_style")]
         [JsonConverter(typeof(StringEnumConverter))]
         public ArrowStyle ArrowStyle { get; set; } = ArrowStyle.End;

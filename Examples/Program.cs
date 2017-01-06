@@ -36,11 +36,11 @@ namespace Examples
             _matplotlibPyPath = args[1];
 
             //ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
-            //ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
+            ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
             //ExampleVisibility.Run(_pythonExePath, _matplotlibPyPath);
             //ExampleHistogram.Run(_pythonExePath, _matplotlibPyPath);
             //ExampleTimeAxis.Run(_pythonExePath, _matplotlibPyPath);
-            ExamplePoint2D.Run(_pythonExePath, _matplotlibPyPath);
+            //ExamplePoint2D.Run(_pythonExePath, _matplotlibPyPath);
         }
     }
 }
