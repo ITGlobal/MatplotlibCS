@@ -41,6 +41,7 @@ class Annotation:
                       arrowprops=dict(
                           linewidth=self.lineWidth,
                           color=self.color["value"],
+                          alpha=self.alpha,
                           arrowstyle=self.arrow_style,
                           connectionstyle='arc3,rad=0',
                       )
