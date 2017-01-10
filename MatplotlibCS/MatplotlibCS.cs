@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using NLog;
 
 namespace MatplotlibCS
 {
@@ -20,6 +21,8 @@ namespace MatplotlibCS
     public class MatplotlibCS
     {
         #region Fields
+
+        private ILogger _log;
 
         /// <summary>
         /// Пусть к интерпрететору питона
@@ -66,6 +69,7 @@ namespace MatplotlibCS
             _pythonExePath = pythonExePath;
             _dasPlotPyPath = dasPlotPyPath;
             _jsonTempPath = jsonTempPath;
+            _log = LogManager.GetLogger(typeof(MatplotlibCS).Name);
 
             if (!Directory.Exists(_jsonTempPath))
                 Directory.CreateDirectory(_jsonTempPath);
@@ -114,7 +118,7 @@ namespace MatplotlibCS
             }
             catch (Exception ex)
             {
-                throw ex;
+                _log.Fatal($"Error while building figure: {ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -138,6 +142,8 @@ namespace MatplotlibCS
                     CreateNoWindow = true,
                     WindowStyle = ProcessWindowStyle.Hidden
                 };
+
+                _log.Info($"Starting python process {_pythonExePath}, {_dasPlotPyPath}");
                 Process.Start(psi);
 
                 // when starting python process, it's better to wait for some time to ensure, that 
@@ -154,6 +160,7 @@ namespace MatplotlibCS
         {
             try
             {
+                _log.Info("Check if python web-service is already running");
                 //Creating the HttpWebRequest
                 var request = WebRequest.Create(_serviceUrlCheckAliveMethod) as HttpWebRequest;
                 //Setting the Request method HEAD, you can also use GET too.
@@ -162,10 +169,14 @@ namespace MatplotlibCS
                 var response = request.GetResponse() as HttpWebResponse;
                 //Returns TRUE if the Status code == 200
                 response.Close();
+
+                _log.Info($"Service response status is {response.StatusCode}");
+
                 return (response.StatusCode == HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
+                _log.Info("Python web-service wasn't found");
                 //Any exception will returns false.
                 return false;
             }

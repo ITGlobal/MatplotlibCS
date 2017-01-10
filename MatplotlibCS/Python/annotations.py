@@ -7,6 +7,7 @@ class Text:
     def __init__(self, jsonDict):
         self.fontSize = 12
         self.color = 'k'
+        self.alpha = 1
         self.__dict__ = jsonDict
         self.x = if_string_convert_to_datetime(self.x)
 
@@ -15,6 +16,7 @@ class Text:
                   self.y,
                   self.text,
                   size=self.fontSize,
+                  alpha=self.alpha,
                   color=self.color["value"])
 
 
@@ -22,6 +24,7 @@ class Annotation:
     def __init__(self, jsonDict):
         self.fontSize = 12
         self.color = 'k'
+        self.alpha = 1
         self.__dict__ = jsonDict
         self.x = if_string_convert_to_datetime(self.arrow_x)
         self.x = if_string_convert_to_datetime(self.text_x)
@@ -34,9 +37,11 @@ class Annotation:
                       textcoords='data',
                       color=self.color["value"],
                       size=self.fontSize,
+                      alpha=self.alpha,
                       arrowprops=dict(
                           linewidth=self.lineWidth,
                           color=self.color["value"],
+                          alpha=self.alpha,
                           arrowstyle=self.arrow_style,
                           connectionstyle='arc3,rad=0',
                       )
