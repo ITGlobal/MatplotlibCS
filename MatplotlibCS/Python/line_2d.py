@@ -29,4 +29,3 @@ class Line2D:
                   markevery=self.markevery,
                   alpha=self.alpha,
                   label=label)
-        plot.hold(True)
