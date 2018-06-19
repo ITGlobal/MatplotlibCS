@@ -68,6 +68,7 @@ def api_plot():
         plot.show()
 
     plot.close("all")
+    return '', 200
 
 @app.route('/kill', methods=['POST', 'GET'])
 def api_kill():
