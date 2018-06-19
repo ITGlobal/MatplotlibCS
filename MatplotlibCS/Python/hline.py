@@ -17,5 +17,4 @@ class Hline(Line2D):
                     lw=self.lineWidth,
                     linestyle=self.lineStyle,
                     alpha=self.alpha,
-                  label=label)
-        plot.hold(True)
+                    label=label)
