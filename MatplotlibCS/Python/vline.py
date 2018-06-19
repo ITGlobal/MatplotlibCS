@@ -16,6 +16,5 @@ class Vline(Line2D):
                     color=self.color["value"],
                     lw=self.lineWidth,
                     linestyle=self.lineStyle,
-            alpha=self.alpha,
-                  label=label)
-        plot.hold(True)
+                    alpha=self.alpha,
+                    label=label)
