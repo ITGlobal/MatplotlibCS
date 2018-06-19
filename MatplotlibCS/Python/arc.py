@@ -19,7 +19,6 @@ class Arc(Line2D):
                         theta2=self.theta2,
                         color=self.color["value"],
                         linewidth=self.lineWidth,
-            alpha=self.alpha,
-                  label=label)
+                        alpha=self.alpha,
+                        label=label)
         axes.add_patch(a)
-        plot.hold(True)
