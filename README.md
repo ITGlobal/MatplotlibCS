@@ -5,12 +5,23 @@
 
 A tiny library for utilizing Matplotlib Python charting library from C#. The general process is this:
 
+## How to install
+```
+PS D:\MatplotlibCS> pip install flask
+PS D:\MatplotlibCS> python -mpip install matplotlib
+```
+```
+PM> Install-Package MatplotlibCS
+```
 ## Basic usage
 
 1. You create an instance of the class Figure and initialize it's properties with relative data. This instance describes everything you want to see on the figure.
 2. You initialize MatplotlibCS class instance. You need to specify a path to python.exe and matplotlib_cs.py in constructor.
 3. Call MatplotlibCS instance BuildFigure method to plot the figure.
-
+4. Run
+```
+PS D:\MatplotlibCS> dotnet .\Examples\bin\Debug\netcoreapp2.1\Examples.dll python .\MatplotlibCS\Python\matplotlib_cs.py
+```
 ## Examples
 ![ExampleSin](http://i.imgur.com/SXUEFCT.png)
 

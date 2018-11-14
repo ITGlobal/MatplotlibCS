@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatplotlibCS", "MatplotlibCS\MatplotlibCS.csproj", "{50B70138-EAF1-4932-AC6F-8AD1C7352CB2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{6D3C71A5-CE32-437B-ABE1-69795D68F4A9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5FBDD60-0FF8-44D8-BE5C-97927C2361A6}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatplotlibCS", "MatplotlibCS\MatplotlibCS.csproj", "{83C39133-FFC0-4099-8660-E62624D690E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{2E76703C-B85E-4601-96BB-6DE62F5F6754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,16 +18,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{50B70138-EAF1-4932-AC6F-8AD1C7352CB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50B70138-EAF1-4932-AC6F-8AD1C7352CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50B70138-EAF1-4932-AC6F-8AD1C7352CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50B70138-EAF1-4932-AC6F-8AD1C7352CB2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6D3C71A5-CE32-437B-ABE1-69795D68F4A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6D3C71A5-CE32-437B-ABE1-69795D68F4A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6D3C71A5-CE32-437B-ABE1-69795D68F4A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6D3C71A5-CE32-437B-ABE1-69795D68F4A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C39133-FFC0-4099-8660-E62624D690E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C39133-FFC0-4099-8660-E62624D690E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C39133-FFC0-4099-8660-E62624D690E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C39133-FFC0-4099-8660-E62624D690E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E76703C-B85E-4601-96BB-6DE62F5F6754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E76703C-B85E-4601-96BB-6DE62F5F6754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E76703C-B85E-4601-96BB-6DE62F5F6754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E76703C-B85E-4601-96BB-6DE62F5F6754}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {360741BB-E7C0-4F90-9A19-85D4CF5EA50C}
 	EndGlobalSection
 EndGlobal

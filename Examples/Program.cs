@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Examples.Plot2D;
-using MatplotlibCS;
+﻿using Examples.Plot2D;
+using System;
 
 namespace Examples
-{
+{    
     /// <summary>
     /// Sample programm which creates several charts and save them in png
     /// </summary>
