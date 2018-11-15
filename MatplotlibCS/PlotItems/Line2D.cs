@@ -46,6 +46,18 @@ namespace MatplotlibCS.PlotItems
         public Color Color { get; set; } = Color.Black;
 
         /// <summary>
+        /// Color of markers edge
+        /// </summary>
+        [JsonProperty(PropertyName = "markeredgecolor")]
+        public Color MarkerEdgeColor { get; set; } = Color.Black;
+        
+        /// <summary>
+        /// Marker's background
+        /// </summary>
+        [JsonProperty(PropertyName = "markerfacecolor")]
+        public Color MarkerFaceColor { get; set; }
+
+        /// <summary>
         /// Color transparency
         /// </summary>
         [JsonProperty(PropertyName = "alpha")]
@@ -57,7 +69,7 @@ namespace MatplotlibCS.PlotItems
         [JsonProperty(PropertyName = "marker")]
         [JsonConverter(typeof(StringEnumConverter))]
         public Marker Marker { get; set; } = Marker.None;
-
+        
         /// <summary>
         /// Размер маркера
         /// </summary>
@@ -65,11 +77,17 @@ namespace MatplotlibCS.PlotItems
         public float MarkerSize { get; set; } = 1;
 
         /// <summary>
-        /// Толщина линии
+        /// Width of line
         /// </summary>
         [JsonProperty(PropertyName = "lineWidth")]
         public float LineWidth { get; set; } = 1;
-        
+
+        /// <summary>
+        /// Width of markers edge
+        /// </summary>
+        [JsonProperty(PropertyName = "markeredgewidth")]
+        public float MarkerEdgeWidth { get; set; } = 1;
+
         /// <summary>
         /// Маркер точки
         /// </summary>

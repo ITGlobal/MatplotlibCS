@@ -158,6 +158,8 @@ namespace MatplotlibCS.PlotItems
         public static Color White = new Color("w");
 
         public static Color Magenta = new Color("m");
+
+        public static Color None = new Color("None");
     }
 
     public class TimeTickFormat

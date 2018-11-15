@@ -67,7 +67,8 @@ def api_plot():
     if not task["onlySaveImage"]:
         plot.show()
 
-    # plot.show()
+    plot.close("all")
+    return '', 200
 
 @app.route('/kill', methods=['POST', 'GET'])
 def api_kill():

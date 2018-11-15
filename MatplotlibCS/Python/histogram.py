@@ -18,8 +18,7 @@ class Histogram:
             cumulative=self.cumulative,
             histtype=self.histtype,
             alpha=self.alpha,
-                  label=label)
-        plot.hold(True)
+            label=label)
         axes.set_xticks(bins)
         # axes.xaxis.set_major_formatter(FormatStrFormatter('%f'))
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Examples.Plot2D;
-using MatplotlibCS;
+﻿using Examples.Plot2D;
+using System;
 
 namespace Examples
-{
+{    
     /// <summary>
     /// Sample programm which creates several charts and save them in png
     /// </summary>
@@ -35,11 +30,12 @@ namespace Examples
             _pythonExePath = args[0];
             _matplotlibPyPath = args[1];
 
-            ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
+            //ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
             ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
-            ExampleVisibility.Run(_pythonExePath, _matplotlibPyPath);
-            ExampleHistogram.Run(_pythonExePath, _matplotlibPyPath);
-            ExampleTimeAxis.Run(_pythonExePath, _matplotlibPyPath);
+            //ExampleVisibility.Run(_pythonExePath, _matplotlibPyPath);
+            //ExampleHistogram.Run(_pythonExePath, _matplotlibPyPath);
+            //ExampleTimeAxis.Run(_pythonExePath, _matplotlibPyPath);
+            //ExamplePoint2D.Run(_pythonExePath, _matplotlibPyPath);
         }
     }
 }

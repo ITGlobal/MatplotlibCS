@@ -76,6 +76,9 @@ namespace MatplotlibCS
 
                 if (firstItem is DateTime)
                 {
+                    if(_x == null)
+                        _x = new List<object>();
+
                     _x.Clear();
                     foreach (var item in value)
                         _x.Add(((DateTime)item).ToString("yyyy-MM-ddTHH:mm:ss,ffffff"));

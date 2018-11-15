@@ -51,7 +51,7 @@ Task("restore")
     .IsDependentOn("init")
     .Does(() =>
 {
-    NuGetRestore(SOLUTION);
+    DotNetCoreRestore();
 });
 
 Task("version")
@@ -80,7 +80,8 @@ Task("compile")
         Configuration = CONFIGURATION
     };
     settings.WithProperty("OutputPath", new string[]{ MakeAbsolute(OUT_DIR).FullPath });
-    MSBuild(SOLUTION, settings);
+    // MSBuild(SOLUTION, settings);
+    DotNetCoreBuild(".");
 });
 
 Task("pack")
