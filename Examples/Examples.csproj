@@ -9,6 +9,10 @@
     <OutputPath>..\out</OutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\out</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
