@@ -8,12 +8,12 @@ using MatplotlibCS.PlotItems;
 
 namespace Examples.Plot2D
 {
-    class ExampleVisibility
+    class ExampleVisibility : IExample
     {
         /// <summary>
         /// Chart of sin
         /// </summary>
-        public static void Run(string pythonExePath, string dasPlotPyPath)
+        public void Run(string pythonExePath, string dasPlotPyPath)
         {
             // init engine with right paths 
             var matplotlibCs = new MatplotlibCS.MatplotlibCS(pythonExePath, dasPlotPyPath);

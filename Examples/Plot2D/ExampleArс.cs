@@ -8,12 +8,12 @@ using MatplotlibCS.PlotItems;
 
 namespace Examples.Plot2D
 {
-    class ExampleArс
+    class ExampleArс : IExample
     {
         /// <summary>
         /// Chart of sin
         /// </summary>
-        public static void Run(string pythonExePath, string dasPlotPyPath)
+        public void Run(string pythonExePath, string dasPlotPyPath)
         {
             #region create test data
             
