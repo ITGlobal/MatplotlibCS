@@ -1,7 +1,8 @@
 {
   "profiles": {
     "Examples": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "ExamplePoint2D python.exe  tmp"
     }
   }
 }

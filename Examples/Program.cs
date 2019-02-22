@@ -1,5 +1,7 @@
 ﻿using Examples.Plot2D;
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace Examples
 {    
@@ -20,22 +22,39 @@ namespace Examples
 
         static void Main(string[] args)
         {
-            if (args.Length != 2)
+            if (args.Length != 3)
             {
                 Console.WriteLine("You must specify path to python.exe and to matplotlib_cs.py in command line arguments");
                 Console.ReadKey();
                 return;
             }
 
-            _pythonExePath = args[0];
-            _matplotlibPyPath = args[1];
+            _pythonExePath = args[1];
+            _matplotlibPyPath = args[2];
+            
+            var assembly = Assembly.GetEntryAssembly();
+            foreach (Type type in assembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IExample))))
+            {
+                if (args.Length > 0 && !args.Contains(type.Name))
+                    continue;
 
-            //ExampleSin.Run(_pythonExePath, _matplotlibPyPath);
-            ExampleArс.Run(_pythonExePath, _matplotlibPyPath);
-            //ExampleVisibility.Run(_pythonExePath, _matplotlibPyPath);
-            //ExampleHistogram.Run(_pythonExePath, _matplotlibPyPath);
-            //ExampleTimeAxis.Run(_pythonExePath, _matplotlibPyPath);
-            //ExamplePoint2D.Run(_pythonExePath, _matplotlibPyPath);
+                Console.WriteLine($"{DateTime.UtcNow} Starting {type.Name}");
+
+                var example = (IExample)Activator.CreateInstance(type);
+
+                try
+                {
+                    example.Run(_pythonExePath, _matplotlibPyPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                }
+
+                Console.WriteLine($"{DateTime.UtcNow} Completed {type.Name}");
+            }
+
+            Console.ReadLine();
         }
     }
 }
