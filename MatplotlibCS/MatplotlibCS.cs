@@ -144,8 +144,8 @@ namespace MatplotlibCS
                 };
 
                 _log.Info($"Starting python process {_pythonExePath}, {_dasPlotPyPath}");
-                Process.Start(psi);
-
+                var pythonProcess = Process.Start(psi);
+                
                 // when starting python process, it's better to wait for some time to ensure, that 
                 // web service started
                 Thread.Sleep(2000);

@@ -20,7 +20,6 @@ rc('font', **{'sans-serif': 'Arial','family': 'sans-serif'})
 
 app = Flask(__name__)
 
-
 def main(args):
     host = "127.0.0.1"
     app.run(host=host, port=57123)
